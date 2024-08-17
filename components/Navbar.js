@@ -1,9 +1,21 @@
 //components/Navbar.js
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Link from "next/link";
-
+import { FaSearch, FaBars, FaShoppingCart } from "react-icons/fa";
+import { FaRegCircleUser } from "react-icons/fa6";
+import { useSession, signOut } from "next-auth/react";
 
 const Navbar = () => {
+  const { data: session, status } = useSession();
+  console.log(status);
+  console.log("Session Data:", session);
+
+  const [handleFaBar, setHandleFaBar] = useState(false);
+
+  const toggleFaBar = () => {
+    setHandleFaBar(!handleFaBar);
+  };
   return (
     <div>
       <nav className="bg-gray-900 shadow-lg item-center">
@@ -15,7 +27,7 @@ const Navbar = () => {
                   <span className="text-white text-2xl font-semibold hover:text-white transition duration-300">
                     <span className="text-blue-500">&lt;</span>
                     <span className="text-white">Port</span>
-                        <span className="text-blue-500">Folio/&gt;</span>
+                    <span className="text-blue-500">Folio/&gt;</span>
                   </span>
                 </Link>
               </div>
@@ -52,16 +64,35 @@ const Navbar = () => {
               </ul>
             </div>
             <div className="hidden md:flex items-center">
-              <Link href="/login">
-                <span className="text-white hover:text-blue-700 transition duration-300 px-4">
-                  Login
-                </span>
-              </Link>
-              <Link href="/signup">
-                <button className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-2 px-4 rounded-lg">
-                  Sign up
-                </button>
-              </Link>
+              {status === "authenticated" ? (
+                <>
+                  <p>
+                    Welcome,{" "}
+                    {session.user.name
+                      ? session.user.name
+                      : session.user.email.split(/(?=\d)/)[0]}
+                  </p>
+                  <button
+                    onClick={() => signOut()}
+                    className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-2 px-4 rounded-lg"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link href="/login">
+                    <span className="hover:text-blue-700 transition duration-300 max-md:bg-gradient-to-r from-purple-500 to-blue-500 max-md:hover:from-purple-700 max-md:hover:to-blue-700 max-md:text-white max-md:font-bold max-md:py-2 max-md:px-3 rounded-lg max-sm:font-medium">
+                      Login
+                    </span>
+                  </Link>
+                  <Link href="/signup">
+                    <button className="max-md:hidden bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-700 hover:to-blue-700 text-white font-bold px-2 py-1 lg:py-2 lg:px-4 rounded-lg">
+                      Sign up
+                    </button>
+                  </Link>
+                </>
+              )}
             </div>
             <div className="md:hidden flex">
               <button className="text-white focus:outline-none">
