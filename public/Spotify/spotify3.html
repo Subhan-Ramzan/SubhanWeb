@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify-3</title>
+    <link rel="stylesheet" href="Spotify3.css">
+    <link rel="stylesheet" href="spotify media query.css">
+</head>
+
+<body>
+    <main>
+        <div class="container">
+            <div class="left">
+                <div class="homepage">
+                    <img class="closesvg" src="close.svg" alt="">
+                    <img src="logo.svg" alt="">
+                    <ul>
+                        <li class="home"><img src="Home.svg" alt="home">Home</li>
+                        <li class="search"><img src="search.svg" alt="search">Search</li>
+                    </ul>
+                </div>
+                <div class="librarypage">
+                    <div class="heading">
+                        <img class="librarylogo" src="library.svg" alt="library">
+                        <h2 class="library"> Your library</h2>
+                        <img class="plussvg" src="plus.svg" alt="plus">
+                    </div>
+                    <div id="songList" class="songList"></div>
+                    <div class="playbar">
+                        <div class="audiocontrols">
+                            <div class="volumediv">
+                                <img class="volumesvg btnsvg" id="volume-btn" src="volume.svg" alt="">
+                                <input type="range" id="volume-slider" class="volume-slider" min="0" max="1" step="0.01"
+                                    value="1">
+                            </div>
+
+                            <img id="prev-btn" class="btnsvg" src="previcious.svg" alt="">
+                            <img id="play-btn" class="btnsvg" src="play.svg" alt="">
+                            <img id="pause-btn" class="btnsvg" src="pause.svg" alt="" style="display:none;">
+                            <img id="next-btn" class="btnsvg" src="next.svg" alt="">
+                            <div id="duration" class="duration">00:00 / 00:00</div>
+                        </div>
+                        <div class="seekbar" id="seekbar">
+                            <div class="circle" id="seek-circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right">
+                <div class="top">
+                    <div class="topnav">
+                        <img class="hamburger" src="hamburger.svg" alt="">
+                        <img src="back.svg" alt="back">
+                        <img src="forward.svg" alt="forward">
+                    </div>
+                    <div class="login-signup">
+                        <button class="signup">Signup</button>
+                        <button class="login">Login</button>
+                        
+                    </div>
+                </div>
+                <div class="content">
+                    <h1>Popular artists</h1>
+                    <div class="playlist" id="singerList"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <audio id="audio-player" src=""></audio>
+    <script src="Spotify3.js"></script>
+</body>
+
+</html>

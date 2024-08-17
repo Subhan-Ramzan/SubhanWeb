@@ -1,0 +1,324 @@
+@import url('https://fonts.googleapis.com/css2?family=Flow+Circular&display=swap');
+
+* {
+    margin: 0;
+    padding: 2px;
+    font-family: system-ui;
+    font-weight: 400;
+    color: white;
+    scrollbar-width: thin;
+    scrollbar-color: #5f5454 #1d1d1d;
+}
+
+body {
+    background-color: #000000;
+}
+
+.container {
+    display: flex;
+    gap: 10px;
+}
+
+.left {
+    position: relative;
+    width: 25%;
+    border-radius: 8px;
+    transition: transform 3s ease, fill 0.3s ease;
+}
+
+.right {
+    border-radius: 8px;
+    padding: 10px;
+    width: 75%;
+    position: relative;
+    height: 95vh;
+}
+
+.closesvg {
+    position: absolute;
+    right: 10px;
+    display: none;
+}
+
+.homepage ul li {
+    display: flex;
+    width: 20px;
+    list-style: none;
+    gap: 5px;
+    text-align: center;
+    align-items: center;
+    padding-top: 14px;
+    color: rgb(233, 226, 226);
+}
+
+.search:hover,
+.home:hover {
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.homepage {
+    background-color: #1d1d1d;
+    padding: 20px;
+    border-radius: 10px;
+    min-height: 62px;
+}
+
+img {
+    filter: invert(1);
+}
+
+.librarypage {
+    position: relative;
+    border-radius: 5px;
+    margin-top: 10px;
+    background-color: #1d1d1d;
+    min-height: 70vh;
+    width: 98%;
+}
+
+.songList {
+    height: 46vh;
+    overflow-y: scroll;
+    margin: 10px 0px;
+}
+
+.playsvg:hover {
+    color: white;
+    font-weight: 1000;
+    cursor: pointer;
+    padding: 5px;
+    margin: 1px;
+}
+
+.playnow {
+    padding: 2px;
+    width: 35px;
+}
+
+.songnumber {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    gap: 4px;
+}
+
+.songname {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 200px;
+}
+
+.playbar {
+    display: inline;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #101010;
+    position: relative;
+}
+
+.btnsvg:hover {
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.audiocontrols {
+    margin: 10px 0px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.volume-slider {
+    display: none;
+    width: 100px;
+    position: absolute;
+    bottom: 25px;
+    border: 2px solid red;
+}
+
+.volumediv {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.volumediv:hover .volume-slider {
+    display: block;
+}
+
+.seekbar {
+    height: 4px;
+    width: 90%;
+    background: white;
+    border-radius: 10px;
+    position: absolute;
+    bottom: 8px;
+    cursor: pointer;
+}
+
+.circle {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background-color: white;
+    position: absolute;
+    top: -5px;
+    left: 0%;
+    cursor: pointer;
+}
+
+.footer {
+    display: flex;
+    font-size: 12px;
+    position: absolute;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 0 0 5px 5px;
+}
+
+.plussvg {
+    position: absolute;
+    right: 2%;
+}
+
+.librarylogo,
+.plussvg {
+    width: 30px;
+}
+
+.heading {
+    display: flex;
+    color: rgba(240, 233, 233, 0.781);
+}
+
+.heading:hover {
+    cursor: pointer;
+    color: white;
+}
+
+.topnav {
+    display: flex;
+    width: 15px;
+    gap: 20px;
+    position: absolute;
+}
+
+.top {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid black;
+    height: 52px;
+    background-color: #101010;
+    border-radius: 10px;
+    padding: 0 20px;
+    margin-bottom: 10px;
+}
+
+.hamburger {
+    display: none;
+}
+
+.hamburger:hover {
+    cursor: pointer;
+}
+
+.login-signup {
+    display: flex;
+    align-items: center;
+}
+
+.signup {
+    border: none;
+    right: 85px;
+    background-color: transparent;
+    color: white;
+    justify-content: center;
+    padding: 10px;
+    display: flex;
+    position: absolute;
+    font-weight: 600;
+}
+
+.login {
+    position: absolute;
+    justify-content: center;
+    border: none;
+    background-color: blue;
+    display: flex;
+    right: 1%;
+    padding: 10px 20px;
+    border-radius: 20px;
+    color: black;
+    background-color: white;
+    font-weight: 700;
+}
+
+.signup:hover {
+    cursor: pointer;
+    opacity: 60%;
+    font-weight: 700;
+}
+
+.login:hover {
+    background-color: rgb(241, 236, 236);
+    opacity: 90%;
+    cursor: pointer;
+}
+
+.content {
+    border-radius: 10px;
+    height: 88vh;
+    background-color: #1d1d1d;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.playlist {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 15px 5px;
+}
+
+.img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    filter: invert(0);
+}
+
+.images {
+    text-align: center;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+.images:hover {
+    cursor: pointer;
+}
+
+.images h2,
+.images p {
+    margin: 5px 0;
+}
+
+.images:hover {
+    background-color: #464444;
+}
