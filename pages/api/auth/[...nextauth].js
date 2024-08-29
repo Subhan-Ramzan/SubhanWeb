@@ -2,64 +2,57 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
-import connectDB from "@/utils/connectDB";
-import Signup from "@/models/Signup";
 import bcrypt from "bcryptjs";
+import { MongoClient } from "mongodb";
 
-connectDB();
+const clientPromise = MongoClient.connect(process.env.MONGODB_URI);
 
 export default NextAuth({
   providers: [
-    CredentialsProvider({
-      id: "credentials",
-      name: "Credentials",
-      credentials: {
-        email: { label: "Email", type: "text" },
-        password: { label: "Password", type: "password" },
-      },
-      async authorize(credentials) {
-        await connectDB();
-        // Fix: Correct fetching of user data
-        const user = await Signup.findOne({ "data.email": credentials.email });
-        if (!user) {
-          throw new Error("No user found with the email");
-        }
-        const isValid = await bcrypt.compare(credentials.password, user.data.password);
-        if (!isValid) {
-          throw new Error("Invalid password");
-        }
-        return user.data; // Return user data
-      },
-    }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
+    CredentialsProvider({
+      name: "Credentials",
+      async authorize(credentials) {
+        const client = await clientPromise;
+        const db = client.db("your-db-name");
+
+        const user = await db
+          .collection("users")
+          .findOne({ email: credentials.email });
+
+        if (!user) {
+          throw new Error("No user found with this email");
+        }
+
+        const isValid = await bcrypt.compare(
+          credentials.password,
+          user.password
+        );
+
+        if (!isValid) {
+          throw new Error("Password is incorrect");
+        }
+
+        return user;
+      },
+    }),
   ],
-  pages: {
-    signIn: "/login",
-  },
   callbacks: {
-    async signIn({ user, account, profile }) {
-      if (account.provider === "google") {
-        return true;
-      }
-      if (account.provider === "credentials") {
-        return user ? true : false;
-      }
-      return false;
-    },
     async session({ session, token }) {
-      session.user.id = token.id;
-      session.user.name = token.name || session.user.name;
+      session.user.id = token.sub;
       return session;
     },
     async jwt({ token, user }) {
       if (user) {
-        token.id = user._id;
-        token.name = user.username;
+        token.sub = user._id;
       }
       return token;
     },
+  },
+  pages: {
+    signIn: "/login",
   },
 });

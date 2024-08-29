@@ -63,7 +63,7 @@ const Navbar = () => {
                 </li>
               </ul>
             </div>
-            <div className="hidden md:flex items-center">
+            <div className="hidden md:flex items-center gap-2">
               {status === "authenticated" ? (
                 <>
                   <p>

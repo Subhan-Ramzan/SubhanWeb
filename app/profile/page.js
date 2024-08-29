@@ -5,13 +5,22 @@ import axios from "axios";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import "@/app/index.css";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const Profile = () => {
   const [supporters, setSupporters] = useState([]);
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [amount, setAmount] = useState("");
+  const router = useRouter();
+  const { data: session, status: sessionStatus } = useSession();
 
+  useEffect(() => {
+    if (sessionStatus === "unauthenticated") {
+      router.push("/login");
+    }
+  }, [sessionStatus, router]);
   useEffect(() => {
     const fetchSupporters = async () => {
       try {
@@ -29,6 +38,7 @@ const Profile = () => {
     };
     fetchSupporters();
   }, []);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -60,7 +70,6 @@ const Profile = () => {
 
   return (
     <>
-      <Navbar />
       <div className="relative">
         <img
           className="w-[100vw] h-[45vh] object-cover object-left-bottom"
@@ -135,7 +144,6 @@ const Profile = () => {
           <p className="opacity-40">9,1729 members . 82 posts . $15,450</p>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

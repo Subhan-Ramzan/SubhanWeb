@@ -1,19 +1,19 @@
 //context/ProductContext.js
 "use client"
-import React, { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
-export const ProductContext = createContext();
+const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
 
-  const addProduct = (product) => {
-    setProducts((prevProducts) => [...prevProducts, product]);
-  };
-
   return (
-    <ProductContext.Provider value={{ products, addProduct, setProducts }}>
+    <ProductContext.Provider value={{ products, setProducts }}>
       {children}
     </ProductContext.Provider>
   );
+};
+
+export const useProductContext = () => {
+  return useContext(ProductContext);
 };
