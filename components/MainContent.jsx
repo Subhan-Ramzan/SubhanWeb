@@ -10,7 +10,7 @@ import Link from 'next/link';
 const MainContent = () => {
     const scrollToBottom = () => {
         window.scrollTo({
-            top: document.documentElement.scrollWidth,
+            top: document.documentElement.scrollHeight,
             behavior: 'smooth'
         });
     };
@@ -30,12 +30,12 @@ const MainContent = () => {
                 <p>A crowdfunfing platform for creators to fund their project</p>
                 <p>Discover the perfect blend with Get Tea – your go-to destination for authentic and aromatic Tea</p>
                 <div className=' mt-4 space-x-2'>
-                <Link href="/login">
-                    <button className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-2 px-4 rounded">
-                        Start Here
-                    </button>
+                    <Link href="/login">
+                        <button className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Start Here
+                        </button>
                     </Link>
-                    
+
                     <Link href="/read">
                         <button className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-2 px-4 rounded">
                             Read More
