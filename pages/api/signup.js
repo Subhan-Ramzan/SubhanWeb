@@ -1,6 +1,5 @@
 // pages/api/signup.js
 import connectDB from "@/utils/connectDB";
-import Seller from "@/models/Seller";
 import Signup from "@/models/Signup";
 import bcrypt from "bcryptjs";
 
