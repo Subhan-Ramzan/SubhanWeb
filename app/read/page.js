@@ -51,7 +51,7 @@ export default function About() {
                             Web Developer & Full Stack Developer
                         </h2>
                         <p className="text-lg text-gray-700">
-                            I'm a passionate web developer with a solid background in both
+                            I&apos;m a passionate web developer with a solid background in both
                             front-end and back-end technologies. With experience building
                             highly responsive websites using modern frameworks, I aim to
                             create seamless user experiences while ensuring robust backend
@@ -179,7 +179,7 @@ export default function About() {
                                 {
                                     name: "SafePass",
                                     description:
-                                        "Create a saved password manager website to save the user's website name, username, and password. Store this information in MongoDB and allow users to easily view their saved password manager data.",
+                                        "Create a saved password manager website to save the user&apos;s website name, username, and password. Store this information in MongoDB and allow users to easily view their saved password manager data.",
                                     link: "https://www.safepass.com",
                                 },
                                 {
@@ -201,7 +201,7 @@ export default function About() {
                                 },
                                 {
                                     name: 'Rock-Paper-Scissors',
-                                    description: 'Created a Rock-Paper-Scissors website where the user can choose one option (rock, paper, or scissors), and the computer randomly selects one as well. The website then displays the result, indicating whether the user wins, loses, or if it\'s a draw.',
+                                    description: 'Created a Rock-Paper-Scissors website where the user can choose one option (rock, paper, or scissors), and the computer randomly selects one as well. The website then displays the result, indicating whether the user wins, loses, or if it&apos;s a draw.',
                                     link: 'https://www.rps.com',
                                 },
                             ].map((project, index) => (
