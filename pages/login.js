@@ -6,7 +6,7 @@ import "@/app/globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import { Image } from "lucide-react";
+import Image from "next/image";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -99,6 +99,8 @@ const Login = () => {
                 <Image
                   src="https://www.svgrepo.com/show/512317/github-142.svg"
                   alt="GitHub"
+                  width={20} // Width in pixels
+                  height={20} // Height in pixels
                   className="h-[20px] w-[20px]"
                 />
                 Continue with GitHub
@@ -111,6 +113,8 @@ const Login = () => {
                 <Image
                   src="https://www.svgrepo.com/show/475656/google-color.svg"
                   alt="Google"
+                  width={20} // Width in pixels
+                  height={20} // Height in pixels
                   className="h-[20px] w-[20px]"
                 />
                 Continue with Google
@@ -120,6 +124,8 @@ const Login = () => {
                 <Image
                   src="https://www.svgrepo.com/show/512317/github-142.svg"
                   alt="GitHub"
+                  width={20} // Width in pixels
+                  height={20} // Height in pixels
                   className="h-[20px] w-[20px]"
                 />
                 Continue with Email

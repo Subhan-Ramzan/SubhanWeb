@@ -209,7 +209,7 @@ export default function About() {
                                     key={index}
                                     className="p-6 bg-gray-100 rounded-lg shadow-md transform transition-all hover:scale-105 hover:shadow-lg"
                                 >
-                                    <h3 className="text-2xl font-semibold mb-2">
+                                    <h3 className="text-2xl font-semibold text-black mb-2">
                                         {project.name}
                                     </h3>
                                     <p className="text-gray-700 mb-2">{project.description}</p>

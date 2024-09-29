@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 import "@/app/index.css";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { Image } from "lucide-react";
+import Image from "next/image";
 
 const Profile = () => {
   const [supporters, setSupporters] = useState([]);
@@ -22,6 +22,7 @@ const Profile = () => {
       router.push("/login");
     }
   }, [sessionStatus, router]);
+
   useEffect(() => {
     const fetchSupporters = async () => {
       try {
@@ -39,7 +40,6 @@ const Profile = () => {
     };
     fetchSupporters();
   }, []);
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -74,27 +74,30 @@ const Profile = () => {
       <div className="relative">
         <Image
           className="w-[100vw] h-[45vh] object-cover object-left-bottom"
-          src="Background.png"
+          src="/Background.png" // Added leading slash
           alt="Background Image"
+          width={1920} // Assuming a typical full-width image size
+          height={810} // Aspect ratio for a 16:9 image
         />
-      </div>
-      <div className="absolute top-[42vh] md:top-[30vh] left-1/2 transform -translate-x-1/2 flex flex-col items-center text-center">
-        <Image
-          src="https://c10.patreonusercontent.com/4/patreon-media/p/campaign/4842667/aa52624d1cef47ba91c357da4a7859cf/eyJoIjoxMDgwLCJ3IjoxMDgwfQ%3D%3D/4.gif?token-time=1721952000&amp;token-hash=K1x4QNfKdby2GOrqWVGFm-GowwJ08qZFEDvbeDfQdkc%3D"
-          alt="Creator Public Page Avatar"
-          data-tag="creator-public-page-avatar"
-          className="w-[150px] h-[150px] rounded-full mb-4"
-        />
-        <h3>@Subhan Ramzan</h3>
-        <p className="opacity-40">Creating Animated art For VITs</p>
+        <div className="absolute top-[42vh] md:top-[30vh] left-1/2 transform -translate-x-1/2 flex flex-col items-center text-center">
+          <Image
+            src="https://c10.patreonusercontent.com/4/patreon-media/p/campaign/4842667/aa52624d1cef47ba91c357da4a7859cf/eyJoIjoxMDgwLCJ3IjoxMDgwfQ%3D%3D/4.gif?token-time=1721952000&token-hash=K1x4QNfKdby2GOrqWVGFm-GowwJ08qZFEDvbeDfQdkc%3D"
+            alt="Creator Public Page Avatar"
+            data-tag="creator-public-page-avatar"
+            width={150} // Width in pixels
+            height={150} // Height in pixels
+            className="w-[150px] h-[150px] rounded-full mb-4"
+          />
+          <h3>@Subhan Ramzan</h3>
+          <p className="opacity-40">Creating Animated art For VITs</p>
+        </div>
       </div>
       <div className="flex flex-col items-center mt-[22vh] md:mt-[10vh]">
-        <div className="flex flex-col md:flex-row w-[95vw] md:w-[80vw]  overflow-auto gap-3 mt-2">
+        <div className="flex flex-col md:flex-row w-[95vw] md:w-[80vw] overflow-auto gap-3 mt-2">
           <div
             className="md:w-[50%] w-[98vw] p-5 rounded-lg"
             style={{
-              background:
-                "radial-gradient(125% 125% at 50% 10%, #444 40%, #63e 100%)",
+              background: "radial-gradient(125% 125% at 50% 10%, #444 40%, #63e 100%)",
             }}
           >
             <h3 className="text-center font-bold text-2xl mb-[2vh]">Payment</h3>
@@ -128,8 +131,7 @@ const Profile = () => {
           <div
             className="md:w-[50%] w-[98vw] p-5 space-y-2 rounded-lg overflow-auto"
             style={{
-              background:
-                "radial-gradient(125% 125% at 50% 10%, #444 40%, #63e 100%)",
+              background: "radial-gradient(125% 125% at 50% 10%, #444 40%, #63e 100%)",
             }}
           >
             <h3 className="text-center font-bold text-2xl">Supporters</h3>
