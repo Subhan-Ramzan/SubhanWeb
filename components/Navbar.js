@@ -26,9 +26,9 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className={`fixed w-full transition-opacity duration-300 ${isScrolled ? 'bg-gray-900/70' : 'bg-gray-900'}`}>
+    <div className={`w-full top-0 left-0 transition-opacity duration-300 ${isScrolled ? 'bg-gray-900/70 fixed' : 'bg-gray-900'} z-50`}>
       <nav className="shadow-lg">
-        <div className="container mx-auto px-4 py-3"> {/* Adjusted padding for better mobile experience */}
+        <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <Link href="/">
@@ -106,9 +106,7 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         <div
-          className={`md:hidden transition-all duration-300 ease-in-out transform ${
-            isMenuOpen ? "max-h-screen opacity-100 translate-y-0" : "max-h-0 opacity-0 -translate-y-4"
-          } overflow-hidden bg-gray-900 py-1`}
+          className={`md:hidden transition-all duration-300 ease-in-out transform ${isMenuOpen ? "max-h-screen opacity-100 translate-y-0" : "max-h-0 opacity-0 -translate-y-4"} overflow-hidden bg-gray-900 px-3 py-0`}
         >
           <ul className="flex flex-col space-y-4">
             <li>

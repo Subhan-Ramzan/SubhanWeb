@@ -20,7 +20,7 @@ const MainContent = () => {
         <>
             <Navbar />
 
-            <div className='w-[95vw] py-[10vh] text-center md:w-[70vw] h-[auto] p-5 mx-auto flex flex-col items-center'>
+            <div className='w-[95vw] text-center md:w-[70vw] h-[auto] p-5 mx-auto flex flex-col items-center'>
                 <h1 className='font-bold text-3xl flex flex-col mb-2'>
                     <div className='pt-[1vh]'>
                         <span className="text-blue-500">&lt;</span>
