@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import "../index.css";
+import { Image } from "lucide-react";
 
 const Page = () => {
     return (
@@ -11,7 +12,7 @@ const Page = () => {
                 <h1 className="text-center font-bold text-4xl py-4">About Me</h1>
                 <div className="flex flex-col lg:flex-row items-center lg:items-start lg:justify-center py-10 space-y-8 lg:space-y-0 lg:space-x-8">
                     <div className="lg:w-2/3 p-6 rounded-lg shadow-md bg-gradient-to-r from-purple-900 to-blue-700 hover:from-purple-800 hover:to-blue-700">
-                        <img
+                        <Image
                             className="w-44 h-44 object-cover object-top rounded-3xl shadow-md"
                             src="/Subhan.jpg"
                             alt="Subhan Ramzan"
@@ -62,7 +63,7 @@ const Page = () => {
                         <ul className="list-disc list-inside mb-4 space-y-4 w-[50vw] bg-white rounded-3xl p-10">
                             <li className="text-black"><span className="font-bold text-black">Portfolio Website:</span> Developed a personal portfolio website with Next.js, Tailwind CSS, and MongoDB, featuring user login, signup, and support messaging.</li>
                             <li className="text-black"><span className="font-bold text-black">Spotify Clone:</span> Created a Spotify clone with JavaScript functionality for browsing singers, displaying their song libraries, and controlling playback (play, stop, skip, and adjust volume).</li>
-                            <li className="text-black"><span className="font-bold text-black">SafePass:</span> Created a saved password manager website to save the user's website name, username, and password, storing this information in MongoDB.</li>
+                            <li className="text-black"><span className="font-bold text-black">SafePass:</span> Created a saved password manager website to save the users website name, username, and password, storing this information in MongoDB.</li>
                             <li className="text-black"><span className="font-bold text-black">Netflix Clone:</span> Created a Netflix home page clone using HTML and CSS.</li>
                             <li className="text-black"><span className="font-bold text-black">TodoList:</span> Built a Todo List website using React.js, allowing users to input, edit, delete, and finish todo items, with data stored in local storage.</li>
                             <li className="text-black"><span className="font-bold text-black">Games:</span> Developed a Tic-Tac-Toe website using JavaScript for win, lose, and two-player modes, and a Rock-Paper-Scissors website with a computer opponent.</li>

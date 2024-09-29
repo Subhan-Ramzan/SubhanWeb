@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import "@/app/index.css";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { Image } from "lucide-react";
 
 const Profile = () => {
   const [supporters, setSupporters] = useState([]);
@@ -71,21 +72,21 @@ const Profile = () => {
   return (
     <>
       <div className="relative">
-        <img
+        <Image
           className="w-[100vw] h-[45vh] object-cover object-left-bottom"
           src="Background.png"
           alt="Background Image"
         />
       </div>
       <div className="absolute top-[42vh] md:top-[30vh] left-1/2 transform -translate-x-1/2 flex flex-col items-center text-center">
-        <img
+        <Image
           src="https://c10.patreonusercontent.com/4/patreon-media/p/campaign/4842667/aa52624d1cef47ba91c357da4a7859cf/eyJoIjoxMDgwLCJ3IjoxMDgwfQ%3D%3D/4.gif?token-time=1721952000&amp;token-hash=K1x4QNfKdby2GOrqWVGFm-GowwJ08qZFEDvbeDfQdkc%3D"
           alt="Creator Public Page Avatar"
           data-tag="creator-public-page-avatar"
           className="w-[150px] h-[150px] rounded-full mb-4"
         />
         <h3>@Subhan Ramzan</h3>
-        <p className="opacity-40">Creating Animated art For VIT's</p>
+        <p className="opacity-40">Creating Animated art For VITs</p>
       </div>
       <div className="flex flex-col items-center mt-[22vh] md:mt-[10vh]">
         <div className="flex flex-col md:flex-row w-[95vw] md:w-[80vw]  overflow-auto gap-3 mt-2">

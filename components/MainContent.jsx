@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import "@/app/index.css"
 import Link from 'next/link';
+import { Image } from "lucide-react";
 
 const MainContent = () => {
     const scrollToBottom = () => {
@@ -51,17 +52,17 @@ const MainContent = () => {
                 <h2 className='font-bold text-2xl'>Your Fans can buy your Chai</h2>
                 <div className="flex justify-around mt-4 w-full">
                     <div className='flex flex-col justify-center text-center items-center m-auto space-y-2'>
-                        <img src="/coin.png" alt="coin" className=" object-cover w-16 h-16 rounded-full" />
+                        <Image src="/coin.png" alt="coin" className=" object-cover w-16 h-16 rounded-full" />
                         <h3>Fans want to contribute</h3>
                         <p>Your fans are writing to contribute  financially </p>
                     </div>
                     <div className='flex flex-col justify-center text-center items-center m-auto space-y-2'>
-                        <img src="/Robot.jpeg" alt="coin" className="object-cover w-16 h-16 rounded-full" />
+                        <Image src="/Robot.jpeg" alt="coin" className="object-cover w-16 h-16 rounded-full" />
                         <h3>Fans want to contribute</h3>
                         <p>Your fans are writing to contribute  financially </p>
                     </div>
                     <div className='flex flex-col justify-center text-center items-center m-auto space-y-2'>
-                        <img src="https://th.bing.com/th/id/OIP.kXVqMQdA_kfb36a3v1vc4gHaEY?rs=1&amp;pid=ImgDetMain" alt="coin" className="object-cover w-16 h-16 rounded-full bg-cover" />
+                        <Image src="https://th.bing.com/th/id/OIP.kXVqMQdA_kfb36a3v1vc4gHaEY?rs=1&amp;pid=ImageDetMain" alt="coin" className="object-cover w-16 h-16 rounded-full bg-cover" />
                         <h3>Fans want to contribute</h3>
                         <p>Your fans are writing to contribute financially </p>
                     </div>
