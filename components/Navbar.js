@@ -16,11 +16,7 @@ const Navbar = () => {
   // Handle scroll to change navbar opacity
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 100) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 100);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -32,7 +28,7 @@ const Navbar = () => {
   return (
     <div className={`fixed w-full transition-opacity duration-300 ${isScrolled ? 'bg-gray-900/70' : 'bg-gray-900'}`}>
       <nav className="shadow-lg">
-        <div className="container mx-auto px-6 py-3">
+        <div className="container mx-auto px-4 py-3"> {/* Adjusted padding for better mobile experience */}
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <Link href="/">
@@ -40,7 +36,7 @@ const Navbar = () => {
                   <span className="text-blue-500">&lt;</span>
                   <span className="text-white group-hover:rotate-45 transition-transform duration-500">Port</span>
                   <span className="text-blue-500 group-hover:text-blue-900 group-hover:rotate-45 transition-all duration-1000">Folio/&gt;</span>
-                </span> 
+                </span>
               </Link>
             </div>
 
@@ -112,7 +108,7 @@ const Navbar = () => {
         <div
           className={`md:hidden transition-all duration-300 ease-in-out transform ${
             isMenuOpen ? "max-h-screen opacity-100 translate-y-0" : "max-h-0 opacity-0 -translate-y-4"
-          } overflow-hidden bg-gray-900 p-4`}
+          } overflow-hidden bg-gray-900 py-1`}
         >
           <ul className="flex flex-col space-y-4">
             <li>
