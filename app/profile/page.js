@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import "@/app/index.css";
+import "@/app/index.css"; // Ensure this includes Tailwind CSS setup
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -73,80 +73,79 @@ const Profile = () => {
     <>
       <div className="relative">
         <Image
-          className="w-[100vw] h-[45vh] object-cover object-left-bottom"
-          src="/Background.png" // Added leading slash
+          className="w-full h-[50vh] object-cover object-center"
+          src="" // Vibrant Background Image
           alt="Background Image"
-          width={1920} // Assuming a typical full-width image size
-          height={810} // Aspect ratio for a 16:9 image
+          width={1920}
+          height={810}
         />
-        <div className="absolute top-[42vh] md:top-[30vh] left-1/2 transform -translate-x-1/2 flex flex-col items-center text-center">
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center text-center bg-black bg-opacity-50 p-5 rounded-lg shadow-lg">
           <Image
             src="https://c10.patreonusercontent.com/4/patreon-media/p/campaign/4842667/aa52624d1cef47ba91c357da4a7859cf/eyJoIjoxMDgwLCJ3IjoxMDgwfQ%3D%3D/4.gif?token-time=1721952000&token-hash=K1x4QNfKdby2GOrqWVGFm-GowwJ08qZFEDvbeDfQdkc%3D"
             alt="Creator Public Page Avatar"
-            data-tag="creator-public-page-avatar"
-            width={150} // Width in pixels
-            height={150} // Height in pixels
-            className="w-[150px] h-[150px] rounded-full mb-4"
+            width={150}
+            height={150}
+            className="w-36 h-36 rounded-full mb-4 border-4 border-blue-500 shadow-lg transform transition duration-500 hover:scale-105"
           />
-          <h3>@Subhan Ramzan</h3>
-          <p className="opacity-40">Creating Animated art For VITs</p>
+          <h3 className="text-white text-3xl font-bold">@Subhan Ramzan</h3>
+          <p className="text-white opacity-70">Creating Animated art For VITs</p>
         </div>
       </div>
-      <div className="flex flex-col items-center mt-[22vh] md:mt-[10vh]">
-        <div className="flex flex-col md:flex-row w-[95vw] md:w-[80vw] overflow-auto gap-3 mt-2">
+      <div className="flex flex-col items-center mt-10 md:mt-20">
+        <div className="flex flex-col md:flex-row w-[95vw] md:w-[80vw] overflow-hidden gap-6 mt-6">
           <div
-            className="md:w-[50%] w-[98vw] p-5 rounded-lg"
+            className="md:w-1/2 w-full p-5 rounded-lg shadow-lg transition-transform transform hover:scale-105"
             style={{
-              background: "radial-gradient(125% 125% at 50% 10%, #444 40%, #63e 100%)",
+              background: "linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%)", // Updated Gradient
             }}
           >
-            <h3 className="text-center font-bold text-2xl mb-[2vh]">Payment</h3>
-            <form onSubmit={handleSubmit} className="flex flex-col space-y-2">
+            <h3 className="text-center text-white text-2xl font-bold mb-4">Payment</h3>
+            <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
               <input
                 placeholder="Enter Name"
-                className="bg-gray-600 text-white py-2 px-4 rounded-lg"
+                className="bg-white text-gray-800 py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
               <input
                 placeholder="Enter Message"
-                className="bg-gray-600 text-white py-2 px-4 rounded-lg"
+                className="bg-white text-gray-800 py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 type="text"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
               />
               <input
                 placeholder="Enter Amount"
-                className="bg-gray-600 text-white py-2 px-4 rounded-lg"
+                className="bg-white text-gray-800 py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 type="text"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
               />
-              <button className="bg-gradient-to-r from-purple-700 to-blue-600 hover:from-purple-800 hover:to-blue-700 text-white font-bold py-2 px-4 rounded-lg">
+              <button className="bg-blue-600 hover:bg-blue-700 transition duration-300 text-white font-bold py-2 px-4 rounded-lg">
                 Pay
               </button>
             </form>
           </div>
           <div
-            className="md:w-[50%] w-[98vw] p-5 space-y-2 rounded-lg overflow-auto"
+            className="md:w-1/2 w-full p-5 space-y-4 rounded-lg shadow-lg transition-transform transform hover:scale-105"
             style={{
-              background: "radial-gradient(125% 125% at 50% 10%, #444 40%, #63e 100%)",
+              background: "linear-gradient(135deg, #fc5c7d 0%, #6a82fb 100%)", // Updated Gradient
             }}
           >
-            <h3 className="text-center font-bold text-2xl">Supporters</h3>
+            <h3 className="text-center text-white text-2xl font-bold">Supporters</h3>
             {supporters.map((supporter, index) => (
-              <p key={index}>
-                {supporter.name} donated {supporter.amount} with a message `
-                {supporter.message}`
+              <p key={index} className="text-white">
+                <strong>{supporter.name}</strong> donated <span className="font-bold">{supporter.amount}</span> with a message: <em>{supporter.message}</em>
               </p>
             ))}
           </div>
         </div>
-        <div className="text-center mt-4">
-          <p className="opacity-40">9,1729 members . 82 posts . $15,450</p>
+        <div className="text-center mt-6">
+          <p className="text-gray-400">9,1729 members . 82 posts . $15,450</p>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
