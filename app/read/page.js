@@ -156,13 +156,13 @@ export default function About() {
                                     name: "Portfolio Website",
                                     description:
                                         "Developed a personal portfolio website with Next.js, Tailwind CSS, and MongoDB, featuring user login, signup, support messaging, and showcasing all my projects.",
-                                    link: "https://www.subhanweb.com",
+                                    link: "https://www.subhanweb.vercel.app",
                                 },
                                 {
                                     name: "E-Commerce Website",
                                     description:
                                         "Developed a responsive e-commerce platform featuring session-based authentication, including social logins (Google, GitHub, Facebook). Integrated MongoDB for product and image management using Multer, Cloudinary, and multer-storage-cloudinary.",
-                                    link: "https://www.ecommerce.com",
+                                    link: "#",
                                 },
                                 {
                                     name: "Real-Time Location Tracking",
@@ -174,35 +174,35 @@ export default function About() {
                                     name: "Spotify Clone",
                                     description:
                                         "Create a Spotify clone with JavaScript functionality for browsing singers, displaying their song libraries, and controlling playback (play, stop, skip, and adjust volume).",
-                                    link: "https://www.spotifyclone.com",
+                                    link: "/Spotify/spotify3.html",
                                 },
                                 {
                                     name: "SafePass",
                                     description:
                                         "Create a saved password manager website to save the user&apos;s website name, username, and password. Store this information in MongoDB and allow users to easily view their saved password manager data.",
-                                    link: "https://www.safepass.com",
+                                    link: "/safepass",
                                 },
                                 {
                                     name: "Netflix Clone",
                                     description:
                                         "Created a Netflix home page clone using HTML and CSS.",
-                                    link: "https://www.netflixclone.com",
+                                    link: "/netflix.html",
                                 },
                                 {
                                     name: "Todo List",
                                     description:
                                         "Our Todo List website is built using React.js, allowing users to input todo items. Each todo item is stored in local storage, enabling users to easily edit, delete, and finish them.",
-                                    link: "https://www.todolist.com",
+                                    link: "/todolist",
                                 },
                                 {
                                     name: 'Tic-Tac-Toe',
                                     description: 'Developed a Tic-Tac-Toe website using JavaScript for win, lose, and two-player modes. Players compete by placing marks on a 3x3 grid to align three in a row, column, or diagonal.',
-                                    link: 'https://www.ttt.com',
+                                    link: '/TicTacToe/TicTacToe.html',
                                 },
                                 {
                                     name: 'Rock-Paper-Scissors',
                                     description: 'Created a Rock-Paper-Scissors website where the user can choose one option (rock, paper, or scissors), and the computer randomly selects one as well. The website then displays the result, indicating whether the user wins, loses, or if it&apos;s a draw.',
-                                    link: 'https://www.rps.com',
+                                    link: '/RPS/RockPaperScissor.html',
                                 },
                             ].map((project, index) => (
                                 <div
@@ -217,7 +217,7 @@ export default function About() {
                                         href={project.link}
                                         className="text-blue-500 hover:underline"
                                     >
-                                        {project.link}
+                                        {project.name}
                                     </a>
                                 </div>
                             ))}
