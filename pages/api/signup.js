@@ -3,6 +3,7 @@ import connectDB from "@/utils/connectDB";
 import Signup from "@/models/Signup";
 import bcrypt from "bcryptjs";
 
+
 connectDB();
 
 export default async function handler(req, res) {

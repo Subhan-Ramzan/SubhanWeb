@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import Image from "next/image";
+import Head from "next/head";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -77,6 +78,23 @@ const Login = () => {
   return (
     sessionStatus !== "authenticated" && (
       <>
+        <Head>
+          <title>Login | Subhan Ramzan Portfolio</title>
+          <meta
+            name="description"
+            content="Login to your account on Subhan Ramzan's portfolio. Access your projects, manage settings, and more with secure login."
+          />
+          <meta name="robots" content="noindex" />{" "}
+          {/* Prevent indexing if desired */}
+          {/* Open Graph Meta Tags */}
+          <meta property="og:title" content="Login to Your Account" />
+          <meta
+            property="og:description"
+            content="Secure access to your projects and settings."
+          />
+          <meta property="og:url" content="https://subhanramzan.com/login" />
+          <meta property="og:type" content="website" />
+        </Head>
         <Navbar />
         <div className="text-white min-h-[80vh] flex flex-col justify-center items-center px-5 py-4 bg-gradient-radial from-black via-[#000] to-[#63e]">
           <div className="flex justify-center items-center text-center py-1">

@@ -115,17 +115,17 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link href="#" className="flex items-center gap-2 text-white hover:text-blue-500 transition-colors duration-300 transform hover:scale-105 hover:rotate-3">
+              <Link href="/read" className="flex items-center gap-2 text-white hover:text-blue-500 transition-colors duration-300 transform hover:scale-105 hover:rotate-3">
                 <FaInfoCircle /> About
               </Link>
             </li>
             <li>
-              <Link href="#" className="flex items-center gap-2 text-white hover:text-blue-500 transition-colors duration-300 transform hover:scale-105 hover:rotate-3">
+              <Link href="/login" className="flex items-center gap-2 text-white hover:text-blue-500 transition-colors duration-300 transform hover:scale-105 hover:rotate-3">
                 <FaServicestack /> Services
               </Link>
             </li>
             <li>
-              <Link href="#" className="flex items-center gap-2 text-white hover:text-blue-500 transition-colors duration-300 transform hover:scale-105 hover:rotate-3">
+              <Link href="/read" className="flex items-center gap-2 text-white hover:text-blue-500 transition-colors duration-300 transform hover:scale-105 hover:rotate-3">
                 <FaEnvelope /> Contact
               </Link>
             </li>

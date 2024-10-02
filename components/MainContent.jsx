@@ -8,11 +8,16 @@ import Link from 'next/link';
 import Image from 'next/image'; // Correct import
 
 const MainContent = () => {
-    const scrollToBottom = () => {
-        window.scrollTo({
-            top: document.documentElement.scrollHeight,
-            behavior: 'smooth'
-        });
+    // const scrollToBottom = () => {
+    //     window.scrollTo({
+    //         top: document.documentElement.scrollHeight,
+    //         behavior: 'smooth'
+    //     });
+    const handleResume = () => {
+        const link = document.createElement("a");
+        link.href = "/Resume.pdf"; // Apne PDF file ka correct path
+        link.download = "Resume.pdf";
+        link.click();
     };
 
     return (
@@ -41,7 +46,10 @@ const MainContent = () => {
                             Read More
                         </button>
                     </Link>
-                    <button onClick={scrollToBottom} className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <button
+                        className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-2 px-4 rounded"
+                        onClick={handleResume}
+                    >
                         Resume
                     </button>
                 </div>
@@ -51,34 +59,34 @@ const MainContent = () => {
                 <h2 className='font-bold text-2xl'>Your Fans can buy your Chai</h2>
                 <div className="flex justify-around mt-4 w-full">
                     <div className='flex flex-col justify-center text-center items-center m-auto space-y-2'>
-                        <Image 
-                            src="/coin.png" 
-                            alt="coin" 
-                            width={64} 
-                            height={64} 
-                            className="object-cover rounded-full" 
+                        <Image
+                            src="/coin.png"
+                            alt="coin"
+                            width={64}
+                            height={64}
+                            className="object-cover rounded-full"
                         />
                         <h3>Fans want to contribute</h3>
                         <p>Your fans are writing to contribute financially</p>
                     </div>
                     <div className='flex flex-col justify-center text-center items-center m-auto space-y-2'>
-                        <Image 
-                            src="/Robot.jpeg" 
-                            alt="robot" 
-                            width={64} 
-                            height={64} 
-                            className="object-cover rounded-full" 
+                        <Image
+                            src="/Robot.jpeg"
+                            alt="robot"
+                            width={64}
+                            height={64}
+                            className="object-cover rounded-full"
                         />
                         <h3>Fans want to contribute</h3>
                         <p>Your fans are writing to contribute financially</p>
                     </div>
                     <div className='flex flex-col justify-center text-center items-center m-auto space-y-2'>
-                        <Image 
-                            src="https://th.bing.com/th/id/OIP.kXVqMQdA_kfb36a3v1vc4gHaEY?rs=1&amp;pid=ImageDetMain" 
-                            alt="external image" 
-                            width={64} 
-                            height={64} 
-                            className="object-cover rounded-full bg-cover" 
+                        <Image
+                            src="https://th.bing.com/th/id/OIP.kXVqMQdA_kfb36a3v1vc4gHaEY?rs=1&amp;pid=ImageDetMain"
+                            alt="external image"
+                            width={64}
+                            height={64}
+                            className="object-cover rounded-full bg-cover"
                         />
                         <h3>Fans want to contribute</h3>
                         <p>Your fans are writing to contribute financially</p>

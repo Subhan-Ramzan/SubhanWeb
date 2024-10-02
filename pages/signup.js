@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import "../app/globals.css";
 import Link from "next/link";
-
+import Head from 'next/head';
 const Signup = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -34,6 +34,17 @@ const Signup = () => {
 
   return (
     <>
+       <Head>
+        <title>Sign Up | Subhan Ramzan Portfolio</title>
+        <meta name="description" content="Create your account on Subhan Ramzan's portfolio. Join now to access exclusive features, manage your projects, and connect with the community." />
+        <meta name="robots" content="noindex" /> {/* Prevent indexing if desired */}
+        {/* Open Graph Meta Tags */}
+        <meta property="og:title" content="Create Your Account" />
+        <meta property="og:description" content="Join Subhan Ramzan's community by signing up. Access exclusive features and manage your projects." />
+        <meta property="og:url" content="https://subhanramzan.com/signup" />
+        <meta property="og:type" content="website" />
+      </Head>
+
       <Navbar />
       <div className="min-h-[80vh] flex flex-col justify-center items-center bg-[radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] px-4 py-8">
         <Link href="/">

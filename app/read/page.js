@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Head from 'next/head';
 
 export default function About() {
     useEffect(() => {
@@ -23,6 +24,16 @@ export default function About() {
 
     return (
         <>
+          <Head>
+                <title>About Me | Subhan Ramzan Portfolio</title>
+                <meta name="description" content="Learn more about Subhan Ramzan, a passionate web developer and full stack developer with expertise in modern web technologies." />
+                <meta name="robots" content="index, follow" /> {/* Allow indexing */}
+                {/* Open Graph Meta Tags */}
+                <meta property="og:title" content="About Subhan Ramzan" />
+                <meta property="og:description" content="Explore Subhan Ramzan's journey as a web developer and full stack developer. Discover his projects and skills." />
+                <meta property="og:url" content="https://subhanramzan.com/about" />
+                <meta property="og:type" content="website" />
+            </Head>
             <Navbar />
             <div className="flex items-center justify-center space-x-5 px-4 md:px-0">
                 <h1 className="text-4xl sm:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 drop-shadow-lg text-center py-5 sm:py-10 transition-transform duration-500 transform hover:scale-110 hover:rotate-3">
