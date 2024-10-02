@@ -118,10 +118,10 @@ const Manager = () => {
                 <div className="text-lg text-white">
                     Your own Password Manager
                 </div>
-                <div className="gap-4 w-full mt-4">
-                    <div className="mb-4">
+                <div className="gap-4 w-full mt-4 ">
+                    <div className="mb-4 ">
                         <input
-                            className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+                            className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 text-black"
                             placeholder="Enter a Website Url"
                             type="url"
                             value={form.site}
@@ -132,7 +132,7 @@ const Manager = () => {
                     </div>
                     <div className="flex flex-col md:flex-row md:space-x-2">
                         <input
-                            className="flex-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+                            className="flex-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 text-black"
                             placeholder="Enter a Username"
                             type="text"
                             value={form.username}
@@ -141,7 +141,7 @@ const Manager = () => {
                             id="username"
                         />
                         <input
-                            className="mt-2 md:mt-0 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+                            className="mt-2 md:mt-0 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 text-black"
                             placeholder="Enter a Password"
                             type="password"
                             value={form.password}

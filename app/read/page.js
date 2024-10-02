@@ -24,33 +24,33 @@ export default function About() {
     return (
         <>
             <Navbar />
-            <div className="flex items-center justify-center space-x-5">
-                <h1 className="text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 drop-shadow-lg text-center py-10 transition-transform duration-500 transform hover:scale-110 hover:rotate-3">
+            <div className="flex items-center justify-center space-x-5 px-4 md:px-0">
+                <h1 className="text-4xl sm:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 drop-shadow-lg text-center py-5 sm:py-10 transition-transform duration-500 transform hover:scale-110 hover:rotate-3">
                     About
                 </h1>
-                <h1 className="text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-600 drop-shadow-lg text-center py-10 transition-transform duration-500 transform hover:scale-110 hover:rotate-3">
+                <h1 className="text-4xl sm:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-600 drop-shadow-lg text-center py-5 sm:py-10 transition-transform duration-500 transform hover:scale-110 hover:rotate-3">
                     Me
                 </h1>
             </div>
 
             <div className="min-h-screen py-10">
                 {/* Container */}
-                <div className="max-w-6xl mx-auto px-6">
+                <div className="max-w-6xl mx-auto px-6 sm:px-4 lg:px-0">
                     {/* Profile Section */}
-                    <section className="opacity-0 transition-all duration-700 bg-white p-10 rounded-lg shadow-lg mb-10 transform">
+                    <section className="opacity-0 transition-all duration-700 bg-white p-6 sm:p-10 rounded-lg shadow-lg mb-10 transform">
                         <div className="flex items-center justify-center space-x-2">
-                            <h1 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-4 tracking-wider transition-transform duration-500 transform hover:scale-105 hover:rotate-2 drop-shadow-lg">
+                            <h1 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-4 tracking-wider transition-transform duration-500 transform hover:scale-105 hover:rotate-2 drop-shadow-lg">
                                 Subhan
                             </h1>
-                            <h1 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 mb-4 tracking-wider transition-transform duration-500 transform hover:scale-105 hover:rotate-2 drop-shadow-lg">
+                            <h1 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 mb-4 tracking-wider transition-transform duration-500 transform hover:scale-105 hover:rotate-2 drop-shadow-lg">
                                 Ramzan
                             </h1>
                         </div>
 
-                        <h2 className="text-2xl text-blue-600 font-semibold mb-4">
+                        <h2 className="text-xl sm:text-2xl text-blue-600 font-semibold mb-4">
                             Web Developer & Full Stack Developer
                         </h2>
-                        <p className="text-lg text-gray-700">
+                        <p className="text-base sm:text-lg text-gray-700">
                             I&apos;m a passionate web developer with a solid background in both
                             front-end and back-end technologies. With experience building
                             highly responsive websites using modern frameworks, I aim to
@@ -66,8 +66,8 @@ export default function About() {
                     </section>
 
                     {/* Contact Section */}
-                    <section className="opacity-0 transition-all duration-700 bg-white p-10 rounded-lg shadow-lg mb-10 transform">
-                        <h2 className="text-3xl font-bold text-gray-800 mb-6">
+                    <section className="opacity-0 transition-all duration-700 bg-white p-6 sm:p-10 rounded-lg shadow-lg mb-10 transform">
+                        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6">
                             Contact Information
                         </h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -90,7 +90,6 @@ export default function About() {
                                         href="https://www.subhanweb.com"
                                         className="text-blue-500 hover:underline transition-all transform hover:scale-105"
                                     >
-                                        {" "}
                                         www.subhanweb.com
                                     </a>
                                 </p>
@@ -99,9 +98,9 @@ export default function About() {
                     </section>
 
                     {/* Skills Section */}
-                    <section className="opacity-0 transition-all duration-700 bg-white p-10 rounded-lg shadow-lg mb-10 transform">
-                        <h2 className="text-3xl font-bold text-gray-800 mb-6">Skills</h2>
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+                    <section className="opacity-0 transition-all duration-700 bg-white p-6 sm:p-10 rounded-lg shadow-lg mb-10 transform">
+                        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6">Skills</h2>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
                             {[
                                 "Web Development",
                                 "Full Stack Development",
@@ -123,21 +122,21 @@ export default function About() {
                     </section>
 
                     {/* Education Section */}
-                    <section className="opacity-0 transition-all duration-700 bg-white p-10 rounded-lg shadow-lg mb-10 transform">
-                        <h2 className="text-3xl font-bold text-gray-800 mb-6">Education</h2>
+                    <section className="opacity-0 transition-all duration-700 bg-white p-6 sm:p-10 rounded-lg shadow-lg mb-10 transform">
+                        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6">Education</h2>
                         <ul className="space-y-6">
                             <li>
-                                <h3 className="text-xl font-semibold">
+                                <h3 className="text-lg sm:text-xl font-semibold">
                                     Harvard College - ICS (Computer Science)
                                 </h3>
                                 <p className="text-gray-700">2022 - 2024</p>
                             </li>
                             <li>
-                                <h3 className="text-xl font-semibold">DSA - C++</h3>
+                                <h3 className="text-lg sm:text-xl font-semibold">DSA - C++</h3>
                                 <p className="text-gray-700">2020 - 2022</p>
                             </li>
                             <li>
-                                <h3 className="text-xl font-semibold">
+                                <h3 className="text-lg sm:text-xl font-semibold">
                                     Matric - Computer Science
                                 </h3>
                                 <p className="text-gray-700">
@@ -148,8 +147,8 @@ export default function About() {
                     </section>
 
                     {/* Projects Section */}
-                    <section className="opacity-0 transition-all duration-700 bg-white p-10 rounded-lg shadow-lg mb-10 transform">
-                        <h2 className="text-3xl font-bold text-gray-800 mb-6">Projects</h2>
+                    <section className="opacity-0 transition-all duration-700 bg-white p-6 sm:p-10 rounded-lg shadow-lg mb-10 transform">
+                        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6">Projects</h2>
                         <div className="space-y-8">
                             {[
                                 {
@@ -209,10 +208,10 @@ export default function About() {
                                     key={index}
                                     className="p-6 bg-gray-100 rounded-lg shadow-md transform transition-all hover:scale-105 hover:shadow-lg"
                                 >
-                                    <h3 className="text-2xl font-semibold text-black mb-2">
+                                    <h3 className="text-lg sm:text-2xl font-semibold text-black mb-2">
                                         {project.name}
                                     </h3>
-                                    <p className="text-gray-700 mb-2">{project.description}</p>
+                                    <p className="text-base sm:text-lg text-gray-700 mb-2">{project.description}</p>
                                     <a
                                         href={project.link}
                                         className="text-blue-500 hover:underline"
@@ -226,8 +225,8 @@ export default function About() {
                 </div>
             </div>
 
-            <style jsx>{`
-        .animate-fadeIn {
+            <style jsx>{
+        `.animate-fadeIn {
           opacity: 1;
           transform: translateY(0);
         }
@@ -235,8 +234,8 @@ export default function About() {
           opacity: 0;
           transform: translateY(20px);
           transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-      `}</style>
+        }`
+      }</style>
 
             <Footer />
         </>
