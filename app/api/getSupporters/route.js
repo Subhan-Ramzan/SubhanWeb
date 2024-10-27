@@ -1,4 +1,4 @@
-// pages/api/getSupporters.js
+// app/api/getSupporters/route.js
 import connectDB from '@/utils/connectDB';
 import Supporter from '@/models/Supporter';
 

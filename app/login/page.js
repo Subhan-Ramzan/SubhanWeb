@@ -1,7 +1,8 @@
 //pages/login.js
+"use client";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { signIn, signOut, useSession } from "next-auth/react";
 import "@/app/globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -39,13 +40,13 @@ const Login = () => {
     }
   };
 
-  const handleGoogleLogin = () => {
-    signIn("google", { callbackUrl: "/profile" });
+  const handleLogin = (provider) => {
+    signIn(provider, { callbackUrl: "/" });
   };
 
   if (sessionStatus === "loading") {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-purple-500 to-blue-500">
+      <div className="flex items-center justify-center min-h-screen ">
         <div className="text-center">
           <svg
             className="animate-spin h-10 w-10 text-white mx-auto"
@@ -113,19 +114,22 @@ const Login = () => {
           </div>
           <div className="flex flex-col md:flex-row justify-center md:justify-around w-full max-w-[90vw] h-auto md:h-[60vh] items-center mt-6 md:space-x-6">
             <div className="flex flex-col gap-3 w-full md:w-auto">
-              <button className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-700 hover:to-blue-700 text-white font-bold rounded-lg inline-flex h-10 w-full md:w-64 items-center justify-center gap-2 p-3 text-sm hover:bg-blue-300 outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60">
+              <button
+                onClick={() => handleLogin("github")}
+                className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-700 hover:to-blue-700 text-white font-bold rounded-lg inline-flex h-10 w-full md:w-64 items-center justify-center gap-2 p-3 text-sm hover:bg-blue-300 outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60"
+              >
                 <Image
                   src="https://www.svgrepo.com/show/512317/github-142.svg"
                   alt="GitHub"
                   width={20} // Width in pixels
                   height={20} // Height in pixels
-                  className="h-[20px] w-[20px]"
+                  className="h-[20px] w-[20px] mr-2" // Add margin to right for spacing
                 />
                 Continue with GitHub
               </button>
 
               <button
-                onClick={handleGoogleLogin}
+                onClick={() => handleLogin("google")}
                 className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-700 hover:to-blue-700 text-white font-bold rounded-lg inline-flex h-10 w-full md:w-64 items-center justify-center gap-2 p-3 text-sm hover:bg-blue-300 outline-none focus:ring-2 focus:ring-[#33398b] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 <Image
@@ -133,20 +137,23 @@ const Login = () => {
                   alt="Google"
                   width={20} // Width in pixels
                   height={20} // Height in pixels
-                  className="h-[20px] w-[20px]"
+                  className="h-[20px] w-[20px] mr-2" // Add margin to right for spacing
                 />
                 Continue with Google
               </button>
 
-              <button className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-700 hover:to-blue-700 text-white font-bold rounded-lg inline-flex h-10 w-full md:w-64 items-center justify-center gap-2 p-3 text-sm hover:bg-blue-300 outline-none focus:ring-2 focus:ring-[#000] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60">
+              <button
+                onClick={() => handleLogin("facebook")}
+                className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-700 hover:to-blue-700 text-white font-bold rounded-lg inline-flex h-10 w-full md:w-64 items-center justify-center gap-2 p-3 text-sm hover:bg-blue-300 outline-none focus:ring-2 focus:ring-[#000] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60"
+              >
                 <Image
-                  src="https://www.svgrepo.com/show/512317/github-142.svg"
-                  alt="GitHub"
+                  src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
+                  alt="Facebook"
                   width={20} // Width in pixels
                   height={20} // Height in pixels
-                  className="h-[20px] w-[20px]"
+                  className="h-[20px] w-[20px] mr-2" // Add margin to right for spacing
                 />
-                Continue with Email
+                Continue with Facebook
               </button>
             </div>
             <div className="w-full md:w-auto mt-4 md:mt-0">

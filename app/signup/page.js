@@ -1,10 +1,10 @@
 // pages/signup.js
+"use client"
 import { useState } from "react";
 import axios from "axios";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import "../app/globals.css";
 import Link from "next/link";
 import Head from 'next/head';
 const Signup = () => {
