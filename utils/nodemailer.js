@@ -1,6 +1,5 @@
-//utils/nodemailer.js
-// utils/nodemailer.js
-import nodemailer from "nodemailer";
+
+import nodemailer from ""
 
 export const sendEmail = async ({ email, emailType, userId, token }) => {
   try {
