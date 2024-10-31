@@ -1,7 +1,5 @@
 "use client";
 import { useEffect } from "react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import Head from 'next/head';
 
 export default function About() {
@@ -34,7 +32,6 @@ export default function About() {
                 <meta property="og:url" content="https://subhanramzan.com/about" />
                 <meta property="og:type" content="website" />
             </Head>
-            <Navbar />
             <div className="flex items-center justify-center space-x-5 px-4 md:px-0">
                 <h1 className="text-4xl sm:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 drop-shadow-lg text-center py-5 sm:py-10 transition-transform duration-500 transform hover:scale-110 hover:rotate-3">
                     About
@@ -248,7 +245,6 @@ export default function About() {
         }`
       }</style>
 
-            <Footer />
         </>
     );
 }

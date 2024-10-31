@@ -2,8 +2,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import "@/app/index.css"; // Ensure this includes Tailwind CSS setup
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -18,8 +16,19 @@ const Profile = () => {
   const { data: session, status: sessionStatus } = useSession();
 
   useEffect(() => {
+    const fetchCookiesData = async () => {
+      try {
+        const response = await axios.get("/api/protected", {
+          withCredentials: true, // Allows sending cookies with request
+        });
+      } catch (error) {
+        console.error("Failed to fetch protected data:", error);
+        router.push("/login");
+      }
+    };
+
     if (sessionStatus === "unauthenticated") {
-      router.push("/login");
+        fetchCookiesData();
     }
   }, [sessionStatus, router]);
 
@@ -88,7 +97,9 @@ const Profile = () => {
             className="w-36 h-36 rounded-full mb-4 border-4 border-blue-500 shadow-lg transform transition duration-500 hover:scale-105"
           />
           <h3 className="text-white text-3xl font-bold">@Subhan Ramzan</h3>
-          <p className="text-white opacity-70">Creating Animated art For VITs</p>
+          <p className="text-white opacity-70">
+            Creating Animated art For VITs
+          </p>
         </div>
       </div>
       <div className="flex flex-col items-center mt-10 md:mt-20">
@@ -99,7 +110,9 @@ const Profile = () => {
               background: "linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%)", // Updated Gradient
             }}
           >
-            <h3 className="text-center text-white text-2xl font-bold mb-4">Payment</h3>
+            <h3 className="text-center text-white text-2xl font-bold mb-4">
+              Payment
+            </h3>
             <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
               <input
                 placeholder="Enter Name"
@@ -133,10 +146,14 @@ const Profile = () => {
               background: "linear-gradient(135deg, #fc5c7d 0%, #6a82fb 100%)", // Updated Gradient
             }}
           >
-            <h3 className="text-center text-white text-2xl font-bold">Supporters</h3>
+            <h3 className="text-center text-white text-2xl font-bold">
+              Supporters
+            </h3>
             {supporters.map((supporter, index) => (
               <p key={index} className="text-white">
-                <strong>{supporter.name}</strong> donated <span className="font-bold">{supporter.amount}</span> with a message: <em>{supporter.message}</em>
+                <strong>{supporter.name}</strong> donated{" "}
+                <span className="font-bold">{supporter.amount}</span> with a
+                message: <em>{supporter.message}</em>
               </p>
             ))}
           </div>
@@ -145,7 +162,6 @@ const Profile = () => {
           <p className="text-gray-400">9,1729 members . 82 posts . $15,450</p>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

@@ -2,7 +2,6 @@
 "use client";
 import React from 'react';
 import About from './About';
-import Navbar from "@/components/Navbar";
 import "@/app/index.css";
 import Link from 'next/link';
 import Image from 'next/image'; // Correct import
@@ -22,7 +21,6 @@ const MainContent = () => {
 
     return (
         <>
-            <Navbar />
 
             <div className='w-[95vw] text-center md:w-[70vw] h-[auto] p-5 mx-auto flex flex-col items-center'>
                 <h1 className='font-bold text-3xl flex flex-col mb-2'>

@@ -4,6 +4,7 @@ import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 console.log(`NEXTAUTH_SECRET is: ${process.env.NEXTAUTH_SECRET}`)
+console.log(`NEXTAUTH_URL is: ${process.env.NEXTAUTH_URL}`)
 
 export const authoptions = NextAuth({
   providers: [

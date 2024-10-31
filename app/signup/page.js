@@ -1,51 +1,92 @@
 // pages/signup.js
-"use client"
-import { useState } from "react";
+"use client";
+import { useState,useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import Link from "next/link";
-import Head from 'next/head';
+import { signIn, signOut, useSession } from "next-auth/react";
+import Head from "next/head";
 const Signup = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [type, setType] = useState("user"); // Added type state
-  const [error, setError] = useState("");
+  const [form, setForm] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const { data: session, status: sessionStatus } = useSession();
 
+  useEffect(() => {
+    const checkSessionOrCookie = async () => {
+      try {
+        // Check if session exists
+        if (sessionStatus === "authenticated") {
+          router.push("/read");
+          return;
+        }
+        
+        // Check if cookie is present by making a request
+        const response = await axios.get("/api/protected", {
+          withCredentials: true,
+        });
+        
+        if (response.status === 200 && response.data?.user) {
+          router.push("/profile");
+        }
+      } catch (error) {
+        // If no session or cookie, remain on the login page
+        console.log("No session or cookie found.");
+      }
+    };
+
+    checkSessionOrCookie();
+  }, [sessionStatus, router]);
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
-      const res = await axios.post("/api/signup", {
-        username,
-        email,
-        password,
-        type, // Send type to the API
-      });
-      console.log(res.data); // Optional: handle success message
-      router.push("/login"); // Redirect to login page after signup
+      const response = await axios.post("/api/signup", form);
+      setSuccess("Signup successful");
+      setError(null);
+      router.push("/verify");
     } catch (error) {
-      setError(error.response.data.error);
+      if (error.response) {
+        setError(error.response.data.message || "An error occurred");
+      } else {
+        setError("An error occurred. Please try again.");
+      }
+      setLoading(false);
+      setSuccess(null);
     }
   };
 
   return (
     <>
-       <Head>
+      <Head>
         <title>Sign Up | Subhan Ramzan Portfolio</title>
-        <meta name="description" content="Create your account on Subhan Ramzan's portfolio. Join now to access exclusive features, manage your projects, and connect with the community." />
-        <meta name="robots" content="noindex" /> {/* Prevent indexing if desired */}
+        <meta
+          name="description"
+          content="Create your account on Subhan Ramzan's portfolio. Join now to access exclusive features, manage your projects, and connect with the community."
+        />
+        <meta name="robots" content="noindex" />{" "}
+        {/* Prevent indexing if desired */}
         {/* Open Graph Meta Tags */}
         <meta property="og:title" content="Create Your Account" />
-        <meta property="og:description" content="Join Subhan Ramzan's community by signing up. Access exclusive features and manage your projects." />
+        <meta
+          property="og:description"
+          content="Join Subhan Ramzan's community by signing up. Access exclusive features and manage your projects."
+        />
         <meta property="og:url" content="https://subhanramzan.com/signup" />
         <meta property="og:type" content="website" />
       </Head>
 
-      <Navbar />
       <div className="min-h-[80vh] flex flex-col justify-center items-center bg-[radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] px-4 py-8">
         <Link href="/">
           <span className="text-4xl font-bold text-white hover:text-gray-300 transition duration-300 text-center">
@@ -76,9 +117,10 @@ const Signup = () => {
                   <input
                     id="username"
                     type="text"
+                    name="username"
                     placeholder="Enter a Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    value={form.username}
+                    onChange={handleChange}
                     required
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-white/20 text-white placeholder-white/50"
                   />
@@ -95,9 +137,10 @@ const Signup = () => {
                   <input
                     id="email"
                     type="email"
+                    name="email"
                     placeholder="Enter an Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={form.email}
+                    onChange={handleChange}
                     required
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-white/20 text-white placeholder-white/50"
                   />
@@ -114,9 +157,10 @@ const Signup = () => {
                   <input
                     id="password"
                     type="password"
+                    name="password"
                     placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    value={form.password}
+                    onChange={handleChange}
                     required
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-white/20 text-white placeholder-white/50"
                   />
@@ -126,9 +170,38 @@ const Signup = () => {
               <div>
                 <button
                   type="submit"
-                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-200 ease-in-out"
+                  className={`flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-lg font-bold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${
+                    loading ? "cursor-not-allowed bg-gray-400" : ""
+                  }`}
+                  disabled={loading} // Disable button when loading
                 >
-                  Create account
+                  {loading ? (
+                    <>
+                      <svg
+                        className="animate-spin h-5 w-5 mr-3"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          strokeWidth="4"
+                        />
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0a12 12 0 00-12 12h4z"
+                        />
+                      </svg>
+                      Loading...
+                    </>
+                  ) : (
+                    "Create Account"
+                  )}
                 </button>
               </div>
             </form>
@@ -144,7 +217,6 @@ const Signup = () => {
           </p>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

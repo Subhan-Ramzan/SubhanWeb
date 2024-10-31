@@ -1,9 +1,9 @@
 //app/layout.js
 import { Inter } from "next/font/google";
 import "./globals.css";
+import SessionWrapper from "@/components/SessionWrapper";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import SessionWrapper from "@/components/SessionWrapper";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -18,11 +18,14 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <SessionWrapper>
           {/* <ProductProvider> */}
+          <Navbar />
             <div className="min-h-[80vh] inset-0 -z-10 items-center [background:radial-gradient(125%_125%_at_50%_10%,#000_30%,#63e_70%)]">
               {children}
             </div>
+            <Footer />
           {/* </ProductProvider> */}
         </SessionWrapper>
+        
       </body>
     </html>
   );

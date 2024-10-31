@@ -1,48 +1,84 @@
-//pages/login.js
 "use client";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { signIn, signOut, useSession } from "next-auth/react";
 import "@/app/globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import Link from "next/link";
 import Image from "next/image";
 import Head from "next/head";
+import axios from "axios";
+
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const { data: session, status: sessionStatus } = useSession();
+  useEffect(() => {
+    const checkSessionOrCookie = async () => {
+      try {
+        // Check if session exists
+        if (sessionStatus === "authenticated") {
+          router.push("/read");
+          return;
+        }
+        
+        // Check if cookie is present by making a request
+        const response = await axios.get("/api/protected", {
+          withCredentials: true,
+        });
+        
+        if (response.status === 200 && response.data?.user) {
+          router.push("/profile");
+        }
+      } catch (error) {
+        // If no session or cookie, remain on the login page
+        console.log("No session or cookie found.");
+      }
+    };
 
+    checkSessionOrCookie();
+  }, [sessionStatus, router]);
+  
   useEffect(() => {
     if (sessionStatus === "authenticated") {
-      router.push("/profile");
+      router.push("/about");
     }
   }, [sessionStatus, router]);
 
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+    setLoading(true);
 
-    const res = await signIn("credentials", {
-      redirect: false,
-      email,
-      password,
-    });
-
-    if (res.error) {
-      setError(res.error);
-    } else {
-      router.push("/profile");
+    try {
+      const response = await axios.post("/api/login", form);
+      setSuccess("Login successful");
+      setError(null);
+      router.push("/");
+    } catch (error) {
+      if (error.response) {
+        setError(error.response.data.message || "An error occurred");
+      } else {
+        setError("An error occurred. Please try again.");
+      }
+      setLoading(false);
+      setSuccess(null);
     }
   };
 
   const handleLogin = (provider) => {
     signIn(provider, { callbackUrl: "/" });
   };
+
 
   if (sessionStatus === "loading") {
     return (
@@ -96,7 +132,6 @@ const Login = () => {
           <meta property="og:url" content="https://subhanramzan.com/login" />
           <meta property="og:type" content="website" />
         </Head>
-        <Navbar />
         <div className="text-white min-h-[80vh] flex flex-col justify-center items-center px-5 py-4 bg-gradient-radial from-black via-[#000] to-[#63e]">
           <div className="flex justify-center items-center text-center py-1">
             <Link href="/">
@@ -177,8 +212,8 @@ const Login = () => {
                             name="email"
                             type="email"
                             autoComplete="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            value={form.email}
+                            onChange={handleChange}
                             required
                             className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 bg-white/10 placeholder:text-white/40 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                           />
@@ -208,8 +243,8 @@ const Login = () => {
                             name="password"
                             type="password"
                             autoComplete="current-password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            value={form.password}
+                            onChange={handleChange}
                             required
                             className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 bg-white/10 placeholder:text-white/40 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                           />
@@ -219,9 +254,38 @@ const Login = () => {
                       <div>
                         <button
                           type="submit"
-                          className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-lg font-bold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                          className={`flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-lg font-bold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${
+                            loading ? "cursor-not-allowed bg-gray-400" : ""
+                          }`}
+                          disabled={loading} // Disable button when loading
                         >
-                          Log in
+                          {loading ? (
+                            <>
+                              <svg
+                                className="animate-spin h-5 w-5 mr-3"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <circle
+                                  className="opacity-25"
+                                  cx="12"
+                                  cy="12"
+                                  r="10"
+                                  strokeWidth="4"
+                                />
+                                <path
+                                  className="opacity-75"
+                                  fill="currentColor"
+                                  d="M4 12a8 8 0 018-8V0a12 12 0 00-12 12h4z"
+                                />
+                              </svg>
+                              Loading...
+                            </>
+                          ) : (
+                            "Login"
+                          )}
                         </button>
                       </div>
                       {error && (
@@ -245,7 +309,6 @@ const Login = () => {
             </div>
           </div>
         </div>
-        <Footer />
       </>
     )
   );
