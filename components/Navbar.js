@@ -50,7 +50,7 @@ const Navbar = () => {
         setUserData(response.data.user);
         // toast.success("User data fetched successfully!"); // Notify successful fetch
       } catch (error) {
-        console.error("Failed to fetch protected data:", error);
+        console.log("Failed to fetch protected data:", error);
         // toast.error("Failed to fetch user data. Please try again."); // Notify fetch error
       }
     };
