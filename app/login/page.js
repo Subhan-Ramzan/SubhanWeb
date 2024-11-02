@@ -7,7 +7,8 @@ import Link from "next/link";
 import Image from "next/image";
 import Head from "next/head";
 import axios from "axios";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; // Include styles
 
 const Login = () => {
   const [form, setForm] = useState({
@@ -27,24 +28,25 @@ const Login = () => {
           router.push("/read");
           return;
         }
-        
+
         // Check if cookie is present by making a request
         const response = await axios.get("/api/protected", {
           withCredentials: true,
         });
-        
+
         if (response.status === 200 && response.data?.user) {
           router.push("/profile");
         }
       } catch (error) {
         // If no session or cookie, remain on the login page
         console.log("No session or cookie found.");
+        // toast.error("No session or cookie found."); // Notify user of no session
       }
     };
 
     checkSessionOrCookie();
   }, [sessionStatus, router]);
-  
+
   useEffect(() => {
     if (sessionStatus === "authenticated") {
       router.push("/about");
@@ -61,13 +63,15 @@ const Login = () => {
 
     try {
       const response = await axios.post("/api/login", form);
-      setSuccess("Login successful");
+      toast.success("Login successful!"); // Notify success
       setError(null);
-      router.push("/");
+      window.location.href = "/";
     } catch (error) {
       if (error.response) {
+        toast.error(error.response.data.message || "An error occurred"); // Notify specific error
         setError(error.response.data.message || "An error occurred");
       } else {
+        toast.error("An error occurred. Please try again."); // General error notification
         setError("An error occurred. Please try again.");
       }
       setLoading(false);
@@ -78,7 +82,6 @@ const Login = () => {
   const handleLogin = (provider) => {
     signIn(provider, { callbackUrl: "/" });
   };
-
 
   if (sessionStatus === "loading") {
     return (
@@ -309,6 +312,7 @@ const Login = () => {
             </div>
           </div>
         </div>
+        <ToastContainer />
       </>
     )
   );

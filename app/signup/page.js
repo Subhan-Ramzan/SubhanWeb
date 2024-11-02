@@ -1,21 +1,28 @@
-// pages/signup.js
 "use client";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { FaCloudUploadAlt } from "react-icons/fa";
+import Image from "next/image";
+
 const Signup = () => {
+  const [imageUrl, setImageUrl] = useState(""); // Initialize imageUrl first
   const [form, setForm] = useState({
     username: "",
     email: "",
     password: "",
+    profileImage: imageUrl, // Use imageUrl from state
   });
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState("");
   const { data: session, status: sessionStatus } = useSession();
 
   useEffect(() => {
@@ -26,12 +33,12 @@ const Signup = () => {
           router.push("/read");
           return;
         }
-        
+
         // Check if cookie is present by making a request
         const response = await axios.get("/api/protected", {
           withCredentials: true,
         });
-        
+
         if (response.status === 200 && response.data?.user) {
           router.push("/profile");
         }
@@ -47,14 +54,17 @@ const Signup = () => {
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const response = await axios.post("/api/signup", form);
+      const formData = { ...form, profileImage: imageUrl }; // `imageUrl` is now an object
+      const response = await axios.post("/api/signup", formData);
       setSuccess("Signup successful");
       setError(null);
+      toast.success("Account created successfully!");
       router.push("/verify");
     } catch (error) {
       if (error.response) {
@@ -64,6 +74,41 @@ const Signup = () => {
       }
       setLoading(false);
       setSuccess(null);
+    }
+  };
+
+  const handleFileChange = async (e) => {
+    const selectedImage = e.target.files[0];
+    if (
+      selectedImage &&
+      selectedImage.type.startsWith("image/") &&
+      selectedImage.size <= 5 * 1024 * 1024
+    ) {
+      const formData = new FormData();
+      formData.append("image", selectedImage);
+
+      try {
+        const response = await fetch("/api/upload", {
+          method: "POST",
+          body: formData,
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+          setImageUrl({
+            url: result.url,
+            public_id: result.public_id,
+          });
+          setImage(result.url);
+          toast.success("Image uploaded successfully!");
+        } else {
+          toast.error(result.error || "Failed to upload image.");
+        }
+      } catch (error) {
+        toast.error("Error uploading image. Please try again.");
+      }
+    } else {
+      toast.error("Please upload a valid image file (max size: 5MB)");
     }
   };
 
@@ -106,6 +151,40 @@ const Signup = () => {
               </div>
             )}
             <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="flex flex-col items-center mt-6">
+                <label
+                  htmlFor="uploadImageInput"
+                  className={`cursor-pointer rounded-full relative w-40 h-40 shadow-lg hover:shadow-xl transform hover:scale-105 ${
+                    image
+                      ? ""
+                      : "border-2 border-dashed border-gray-300 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-blue-500 hover:via-green-500 hover:to-purple-500 transition-all duration-500 ease-in-out"
+                  }`}
+                >
+                  {image ? (
+                    <Image
+                      src={image}
+                      alt="Uploaded Profile"
+                      layout="fill" // Fills the entire container
+                      className="rounded-full object-cover" // Ensures it stays circular and covers fully
+                    />
+                  ) : (
+                    <div className="flex flex-col items-center text-white">
+                      <FaCloudUploadAlt className="text-6xl mb-2 opacity-80" />
+                      <p className="text-sm font-semibold opacity-90">
+                        Upload Profile Image
+                      </p>
+                    </div>
+                  )}
+                  <input
+                    type="file"
+                    id="uploadImageInput"
+                    className="absolute inset-0 opacity-0 cursor-pointer"
+                    onChange={handleFileChange}
+                    accept="image/*"
+                  />
+                </label>
+              </div>
+
               <div>
                 <label
                   htmlFor="username"

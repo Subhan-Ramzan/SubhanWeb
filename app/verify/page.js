@@ -17,7 +17,7 @@ export default function VerifyPage() {
     const handleSubmit = async () => {
         try {
             if (isButtonEnabled) {
-                const response = await axios.post('/api/verify', { otp: value })
+                const response = await axios.post('/api/verify', { token: value })
                 console.log(response.data);
                 router.push('/login')
             }
