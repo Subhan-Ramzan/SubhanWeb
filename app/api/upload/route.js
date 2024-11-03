@@ -59,16 +59,24 @@ export async function POST(req) {
     // Directly upload to Cloudinary without `multer`
     console.log('Starting upload to Cloudinary...');
     const result = await new Promise((resolve, reject) => {
-      cloudinary.uploader
-        .upload_stream({ folder: 'nextjs-images', timeout: 120000 }, (error, result) => {
+      const uploadStream = cloudinary.uploader.upload_stream(
+        { folder: 'nextjs-images', timeout: 120000 },
+        (error, result) => {
           if (error) {
             console.error('Cloudinary upload error:', error);
             return reject(error);
           }
           console.log('Cloudinary upload result:', result); // Log the result
           resolve(result);
-        })
-        .end(fileBuffer); // End stream after sending file buffer
+        }
+      );
+
+      uploadStream.on('error', (uploadError) => {
+        console.error('Stream error during upload:', uploadError);
+        reject(uploadError);
+      });
+
+      uploadStream.end(fileBuffer); // End stream after sending file buffer
     });
 
     return NextResponse.json({
@@ -77,7 +85,7 @@ export async function POST(req) {
       public_id: result.public_id,
     }, { status: 201 });
   } catch (error) {
-    console.error('Error processing upload:', error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error('Error processing upload:', error.message || error);
+    return NextResponse.json({ error: error.message || 'Internal server error' }, { status: 500 });
   }
 }
