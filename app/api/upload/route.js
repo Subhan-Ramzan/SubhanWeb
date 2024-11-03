@@ -1,12 +1,26 @@
-// app/api/upload/route.js
 import { v2 as cloudinary } from 'cloudinary';
 import { NextResponse } from 'next/server';
 
 // Configure Cloudinary
+const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
+const apiKey = process.env.CLOUDINARY_API_KEY;
+const apiSecret = process.env.CLOUDINARY_API_SECRET;
+
+if (!cloudName || !apiKey || !apiSecret) {
+  console.error('Cloudinary configuration error: Missing environment variables');
+} else {
+  console.log("Cloudinary configuration successful");
+}
+
+// Log the Cloudinary environment variables (excluding the API secret for security reasons)
+console.log('CLOUDINARY_CLOUD_NAME:', cloudName);
+console.log('CLOUDINARY_API_KEY:', apiKey);
+// Note: Avoid logging the apiSecret to keep it secure.
+
 cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
+  cloud_name: cloudName,
+  api_key: apiKey,
+  api_secret: apiSecret,
 });
 
 export const config = {
@@ -17,17 +31,24 @@ export const config = {
 
 async function parseMultipartFormData(req) {
   const contentType = req.headers.get('content-type');
+  console.log('Incoming request content-type:', contentType); // Log content type
+
   if (!contentType || !contentType.includes('multipart/form-data')) {
+    console.error('Invalid content-type, expected multipart/form-data');
     throw new Error('Invalid content-type, expected multipart/form-data');
   }
 
   const formData = await req.formData();
   const file = formData.get('image');
+  console.log('File uploaded:', file); // Log the uploaded file
+
   if (!file || !(file instanceof File)) {
+    console.error('No file uploaded or invalid file type');
     throw new Error('No file uploaded');
   }
 
   const buffer = await file.arrayBuffer();
+  console.log('File buffer size:', buffer.byteLength); // Log buffer size
   return Buffer.from(buffer);
 }
 
@@ -36,6 +57,7 @@ export async function POST(req) {
     const fileBuffer = await parseMultipartFormData(req);
 
     // Directly upload to Cloudinary without `multer`
+    console.log('Starting upload to Cloudinary...');
     const result = await new Promise((resolve, reject) => {
       cloudinary.uploader
         .upload_stream({ folder: 'nextjs-images', timeout: 120000 }, (error, result) => {
@@ -43,6 +65,7 @@ export async function POST(req) {
             console.error('Cloudinary upload error:', error);
             return reject(error);
           }
+          console.log('Cloudinary upload result:', result); // Log the result
           resolve(result);
         })
         .end(fileBuffer); // End stream after sending file buffer
