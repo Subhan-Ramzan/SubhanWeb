@@ -14,8 +14,8 @@ const MainContent = () => {
     //     });
     const handleResume = () => {
         const link = document.createElement("a");
-        link.href = "/SubhanResume.pdf"; // Apne PDF file ka correct path
-        link.download = "SubhanResume.pdf";
+        link.href = "/api/downloadResume"; // API route for downloading the resume
+        link.download = "SubhanResume-2.pdf";
         link.click();
     };
 
