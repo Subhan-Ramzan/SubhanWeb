@@ -63,9 +63,9 @@ const Content = () => {
       <h1 className="font-bold text-2xl text-gray-800 flex items-center justify-center mt-1 mb-3">iTask - Manage Your Todos at One Place</h1>
       <h3 className="text-xl font-semibold text-gray-700 mb-3">Add a Todo</h3>
 
-      <div className="flex items-center mb-6 flex-wrap justify-center gap-2">
+      <div className="flex text-black items-center mb-6 flex-wrap justify-center gap-2">
         <input
-          className="p-3 w-[90vw] md:w-[35vw] border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+          className="p-3 w-[90vw] text-black md:w-[35vw] border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
           type="text"
           placeholder="Enter a Todo"
           value={todo}
