@@ -64,7 +64,7 @@ const About = () => {
               width={400} // Set width
               height={300} // Set height
             />
-            <Link href="/Spotify/spotify3.html">
+            <Link href="/Spotify/Spotify.html">
               <button className="bg-gradient-to-r w-full from-purple-600 to-[#000] hover:from-purple-700 hover:to-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
                 Open Link
               </button>

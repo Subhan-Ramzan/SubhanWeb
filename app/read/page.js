@@ -181,7 +181,7 @@ export default function About() {
                                     name: "Spotify Clone",
                                     description:
                                         "Create a Spotify clone with JavaScript functionality for browsing singers, displaying their song libraries, and controlling playback (play, stop, skip, and adjust volume).",
-                                    link: "/Spotify/spotify3.html",
+                                    link: "/Spotify/Spotify.html",
                                 },
                                 {
                                     name: "SafePass",
