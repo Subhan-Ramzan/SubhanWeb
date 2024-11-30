@@ -9,20 +9,21 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import Image from "next/image";
+import { CldImage, CldUploadWidget } from "next-cloudinary";
 
 const Signup = () => {
-  const [imageUrl, setImageUrl] = useState(""); // Initialize imageUrl first
   const [form, setForm] = useState({
     username: "",
     email: "",
     password: "",
-    profileImage: imageUrl, // Use imageUrl from state
+    profileImage: "",
   });
+  const [publicId, setPublicId] = useState(null);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [image, setImage] = useState("");
+  const [uploading, setUploading] = useState(false);
   const { data: session, status: sessionStatus } = useSession();
 
   useEffect(() => {
@@ -60,7 +61,7 @@ const Signup = () => {
     setLoading(true);
 
     try {
-      const formData = { ...form, profileImage: imageUrl }; // `imageUrl` is now an object
+      const formData = { ...form, profileImage: publicId }; // Use publicId as profileImage
       const response = await axios.post("/api/signup", formData);
       setSuccess("Signup successful");
       setError(null);
@@ -77,40 +78,37 @@ const Signup = () => {
     }
   };
 
-  const handleFileChange = async (e) => {
-    const selectedImage = e.target.files[0];
-    if (
-      selectedImage &&
-      selectedImage.type.startsWith("image/") &&
-      selectedImage.size <= 5 * 1024 * 1024
-    ) {
-      const formData = new FormData();
-      formData.append("image", selectedImage);
-
-      try {
-        const response = await fetch("/api/upload", {
-          method: "POST",
-          body: formData,
-        });
-
-        const result = await response.json();
-        if (response.ok) {
-          setImageUrl({
-            url: result.url,
-            public_id: result.public_id,
-          });
-          setImage(result.url);
-          toast.success("Image uploaded successfully!");
-        } else {
-          toast.error(result.error || "Failed to upload image.");
-        }
-      } catch (error) {
-        toast.error("Error uploading image. Please try again.");
-      }
-    } else {
-      toast.error("Please upload a valid image file (max size: 5MB)");
-    }
-  };
+  if (sessionStatus === "loading") {
+    return (
+      <div className="flex items-center justify-center min-h-screen ">
+        <div className="text-center">
+          <svg
+            className="animate-spin h-10 w-10 text-white mx-auto"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            ></circle>
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zM12 20a8 8 0 008-8h4c0 6.627-5.373 12-12 12v-4z"
+            ></path>
+          </svg>
+          <p className="mt-4 text-white text-lg font-semibold">
+            Loading, please wait...
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -128,16 +126,19 @@ const Signup = () => {
           property="og:description"
           content="Join Subhan Ramzan's community by signing up. Access exclusive features and manage your projects."
         />
-        <meta property="og:url" content="https://subhanramzan.com/signup" />
+        <meta
+          property="og:url"
+          content="https://watchmovie-nine.vercel.app/signup"
+        />
         <meta property="og:type" content="website" />
       </Head>
 
-      <div className="min-h-[80vh] flex flex-col justify-center items-center bg-[radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] px-4 py-8">
+      <div className="min-h-screen py-4 flex flex-col justify-center items-center bg-[radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] px-4">
         <Link href="/">
-          <span className="text-4xl font-bold text-white hover:text-gray-300 transition duration-300 text-center">
+          <span className="text-3xl md:text-4xl font-bold text-white hover:text-gray-300 transition duration-300 text-center">
             <span className="text-blue-400">&lt;</span>
-            New
-            <span className="text-blue-400">Fashion/&gt;</span>
+            Watch
+            <span className="text-blue-400">Movie/&gt;</span>
           </span>
         </Link>
         <div className="mt-8 w-full max-w-md">
@@ -152,37 +153,44 @@ const Signup = () => {
             )}
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="flex flex-col items-center mt-6">
-                <label
-                  htmlFor="uploadImageInput"
-                  className={`cursor-pointer rounded-full relative w-40 h-40 shadow-lg hover:shadow-xl transform hover:scale-105 ${
-                    image
-                      ? ""
-                      : "border-2 border-dashed border-gray-300 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-blue-500 hover:via-green-500 hover:to-purple-500 transition-all duration-500 ease-in-out"
-                  }`}
+                <CldUploadWidget
+                  uploadPreset="next-image"
+                  onSuccess={({ event, info }) => {
+                    if (event === "success") {
+                      setPublicId(info?.public_id);
+                    }
+                  }}
                 >
-                  {image ? (
-                    <Image
-                      src={image}
-                      alt="Uploaded Profile"
-                      layout="fill" // Fills the entire container
-                      className="rounded-full object-cover" // Ensures it stays circular and covers fully
-                    />
-                  ) : (
-                    <div className="flex flex-col items-center text-white">
-                      <FaCloudUploadAlt className="text-6xl mb-2 opacity-80" />
-                      <p className="text-sm font-semibold opacity-90">
-                        Upload Profile Image
-                      </p>
-                    </div>
+                  {({ open }) => (
+                    <label
+                      htmlFor="uploadImageInput"
+                      className={`cursor-pointer rounded-full relative w-40 h-40 shadow-lg hover:shadow-xl transform hover:scale-105 overflow-hidden ${
+                        publicId
+                          ? ""
+                          : "border-2 border-dashed border-gray-300 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-blue-500 hover:via-green-500 hover:to-purple-500 transition-all duration-500 ease-in-out"
+                      }`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        open();
+                      }}
+                    >
+                      {publicId ? (
+                        <CldImage
+                          src={publicId}
+                          alt="Uploaded Image"
+                          width={300}
+                          height={300}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="flex flex-col items-center text-white">
+                          <FaCloudUploadAlt className="text-6xl mb-2 opacity-80" />
+                          <button>Upload an Image</button>
+                        </div>
+                      )}
+                    </label>
                   )}
-                  <input
-                    type="file"
-                    id="uploadImageInput"
-                    className="absolute inset-0 opacity-0 cursor-pointer"
-                    onChange={handleFileChange}
-                    accept="image/*"
-                  />
-                </label>
+                </CldUploadWidget>
               </div>
 
               <div>

@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useRouter } from "next/navigation";
-
+import Link from 'next/link';
 export default function VerifyPage() {
     const [value, setValue] = useState('');  // To store token value
     const [isButtonEnabled, setIsButtonEnabled] = useState(false);  // To control button disable state
@@ -31,8 +31,8 @@ export default function VerifyPage() {
     }
 
     return (
-        <div className="p-6 max-w-sm mx-auto">
-            <label htmlFor="token" className="block mb-2 text-lg font-medium text-gray-700">
+        <div className="p-6 pt-24 max-w-sm mx-auto">
+            <label htmlFor="token" className="block mb-2 text-lg text-center font-bold text-gray-100">
                 Token
             </label>
             <input
@@ -50,6 +50,15 @@ export default function VerifyPage() {
             >
                 Click Verify
             </button>
+            <p className="mt-6 text-center text-sm text-white">
+                Verify With Otp ?{" "}
+                <Link
+                    href="/verify-otp"
+                    className="font-semibold leading-6 text-blue-500 hover:text-blue-300 transition duration-200"
+                >
+                    Click Me
+                </Link>
+            </p>
         </div>
     );
 }

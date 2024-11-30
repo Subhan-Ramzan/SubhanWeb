@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
         <SessionWrapper>
           {/* <ProductProvider> */}
           <Navbar />
-            <div className="min-h-[80vh] inset-0 -z-10 items-center [background:radial-gradient(125%_125%_at_50%_10%,#000_30%,#63e_70%)]">
+            <div className="min-h-[80vh] inset-0 -z-10 items-center justify-center [background:radial-gradient(125%_125%_at_50%_10%,#000_30%,#63e_70%)]">
               {children}
             </div>
             <Footer />

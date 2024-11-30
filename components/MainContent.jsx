@@ -14,8 +14,8 @@ const MainContent = () => {
     //     });
     const handleResume = () => {
         const link = document.createElement("a");
-        link.href = "/api/downloadResume"; // API route for downloading the resume
-        link.download = "SubhanResume-2.pdf";
+        link.href = "/api/downloadResume"; 
+        link.download = "SubhanResume.pdf";
         link.click();
     };
 

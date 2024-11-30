@@ -1,5 +1,5 @@
 // pages/blog.js
-import React from 'react';
+import React from "react";
 
 const htmlblog = () => {
   return (
@@ -9,10 +9,13 @@ const htmlblog = () => {
         <p className="text-gray-700 mb-6">
           This blog covers HTML basics and advanced topics with examples.
         </p>
-        
+
         <section className="mb-10">
           <h2 className="text-2xl font-semibold mb-2">HTML Basics</h2>
-          <p className="mb-4">HTML (Hypertext Markup Language) is the standard language for creating web pages.</p>
+          <p className="mb-4">
+            HTML (Hypertext Markup Language) is the standard language for
+            creating web pages.
+          </p>
           <h3 className="text-xl font-semibold mb-2">Basic Structure</h3>
           <pre className="bg-gray-200 p-4 rounded-lg overflow-x-auto">
             <code>
@@ -33,30 +36,52 @@ const htmlblog = () => {
 
         <section className="mb-10">
           <h2 className="text-2xl font-semibold mb-2">HTML Elements</h2>
-          <p className="mb-4">HTML elements are the building blocks of HTML pages. Here are some common elements:</p>
+          <p className="mb-4">
+            HTML elements are the building blocks of HTML pages. Here are some
+            common elements:
+          </p>
           <ul className="list-disc pl-5 mb-4">
-            <li><strong>Headings:</strong> &lt;h1&gt; to &lt;h6&gt;</li>
-            <li><strong>Paragraphs:</strong> &lt;p&gt;</li>
-            <li><strong>Links:</strong> &lt;a&gt;</li>
-            <li><strong>Images:</strong> &lt;img&gt;</li>
+            <li>
+              <strong>Headings:</strong> &lt;h1&gt; to &lt;h6&gt;
+            </li>
+            <li>
+              <strong>Paragraphs:</strong> &lt;p&gt;
+            </li>
+            <li>
+              <strong>Links:</strong> &lt;a&gt;
+            </li>
+            <li>
+              <strong>Images:</strong> &lt;img&gt;
+            </li>
           </ul>
           <h3 className="text-xl font-semibold mb-2">Example of a Paragraph</h3>
           <pre className="bg-gray-200 p-4 rounded-lg overflow-x-auto">
-            <code>
-              {`<p>This is a paragraph in HTML.</p>`}
-            </code>
+            <code>{`<p>This is a paragraph in HTML.</p>`}</code>
           </pre>
         </section>
 
         <section className="mb-10">
           <h2 className="text-2xl font-semibold mb-2">Advanced HTML Topics</h2>
-          <p className="mb-4">Once you understand the basics, you can explore advanced topics such as:</p>
+          <p className="mb-4">
+            Once you understand the basics, you can explore advanced topics such
+            as:
+          </p>
           <ul className="list-disc pl-5 mb-4">
-            <li><strong>Forms:</strong> Collect user input.</li>
-            <li><strong>Semantic HTML:</strong> Use meaningful tags like &lt;article&gt; and &lt;section&gt;.</li>
-            <li><strong>Accessibility:</strong> Ensure your HTML is usable for everyone.</li>
+            <li>
+              <strong>Forms:</strong> Collect user input.
+            </li>
+            <li>
+              <strong>Semantic HTML:</strong> Use meaningful tags like
+              &lt;article&gt; and &lt;section&gt;.
+            </li>
+            <li>
+              <strong>Accessibility:</strong> Ensure your HTML is usable for
+              everyone.
+            </li>
           </ul>
-          <h3 className="text-xl font-semibold mb-2">Example of a Simple Form</h3>
+          <h3 className="text-xl font-semibold mb-2">
+            Example of a Simple Form
+          </h3>
           <pre className="bg-gray-200 p-4 rounded-lg overflow-x-auto">
             <code>
               {`<form action="/submit" method="POST">

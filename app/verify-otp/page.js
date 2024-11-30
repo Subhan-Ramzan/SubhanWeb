@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import axios from "axios";
+import Link from 'next/link';
 
 export default function OTPpage() {
   const [otp, setOtp] = useState(new Array(6).fill(""));
@@ -15,7 +16,7 @@ export default function OTPpage() {
     newOtp[index] = element.value;
     setOtp(newOtp);
 
-    setIsButtonEnabled(newOtp.every(digit => digit !== ""));
+    setIsButtonEnabled(newOtp.every((digit) => digit !== ""));
 
     if (element.value && index < 5) {
       document.getElementById(`otp-input-${index + 1}`).focus();
@@ -47,10 +48,13 @@ export default function OTPpage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+    <div className="flex flex-col items-center justify-center h-screen">
       <div className="bg-white p-8 rounded-lg shadow-lg w-96">
         <h2 className="text-2xl font-semibold text-center mb-6">Enter OTP</h2>
-        <div className="flex justify-center space-x-2 mb-6" onPaste={handlePaste}>
+        <div
+          className="flex justify-center space-x-2 mb-6"
+          onPaste={handlePaste}
+        >
           {otp.map((data, index) => (
             <input
               key={index}
@@ -75,6 +79,15 @@ export default function OTPpage() {
           Verify OTP
         </button>
       </div>
+      <p className="mt-6 text-center text-sm text-white">
+        Verify With Token ?{" "}
+        <Link
+          href="/verify"
+          className="font-semibold leading-6 text-blue-500 hover:text-blue-300 transition duration-200"
+        >
+          Click Me
+        </Link>
+      </p>
     </div>
   );
 }

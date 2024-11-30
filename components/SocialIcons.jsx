@@ -17,7 +17,7 @@ const SocialIcons = () => {
   }, []);
 
   return (
-    <div className={`fixed right-4 bottom-1/2 transform translate-y-1/2 flex flex-col gap-4 transition-opacity duration-700 ${visible ? 'opacity-100' : 'opacity-0'}`}>
+    <div className={`fixed z-50 right-4 bottom-1/2 transform translate-y-1/2 flex flex-col gap-4 transition-opacity duration-700 ${visible ? 'opacity-100' : 'opacity-0'}`}>
       <a 
         href={`https://wa.me/${whatsappNumber}?text=Hi, I want to connect with you!`} 
         target="_blank" 
