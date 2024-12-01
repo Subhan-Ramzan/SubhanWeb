@@ -1,59 +1,67 @@
+//app/blogpost/[slug]/page.js
+import { notFound } from "next/navigation";
 import fs from "fs";
 import matter from "gray-matter";
-import { notFound } from "next/navigation";
+import { unified } from "unified";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
 import rehypeDocument from "rehype-document";
 import rehypeFormat from "rehype-format";
 import rehypeStringify from "rehype-stringify";
-import remarkParse from "remark-parse";
-import remarkRehype from "remark-rehype";
-import { unified } from "unified";
 import rehypePrettyCode from "rehype-pretty-code";
 import { transformerCopyButton } from "@rehype-pretty/transformers";
-import OnThisPage from "@/components/onthispage";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import OnThisPage from "@/components/onthispage";
 import "./styles.css";
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const filepath = `content/${slug}.md`;
+
+  if (!fs.existsSync(filepath)) {
+    return notFound();
+  }
+
+  const fileContent = fs.readFileSync(filepath, "utf-8");
+  const { data } = matter(fileContent);
+
+  return {
+    title: data.title,
+    description: data.description,
+  };
+}
+
 export default async function Page({ params }) {
   const slug = await params.slug;
-
-  const relativePath = `content/${slug}.md`;
-  const absolutePath = `/content/${slug}.md`;
-
-  const filepath = (await fs.existsSync(relativePath))
-    ? relativePath
-    : absolutePath;
+  const filepath = `content/${slug}.md`;
 
   if (!fs.existsSync(filepath)) {
     notFound();
     return;
   }
 
-  // Read the markdown content and parse the frontmatter
   const fileContent = fs.readFileSync(filepath, "utf-8");
   const { content, data } = matter(fileContent);
 
-  // Initialize the processor to transform markdown to HTML
   const processor = unified()
-    .use(remarkParse) // Parse markdown syntax
-    .use(remarkRehype) // Convert markdown to HTML
-    .use(rehypeDocument, { title: data.title || "C++ Programming Tutorial" }) // Wrap HTML in a document structure
-    .use(rehypeFormat) // Format the HTML for readability
-    .use(rehypeStringify) // Convert the AST back into HTML string
-    .use(rehypeSlug) // Add slugs to headings for linking
-    .use(rehypeAutolinkHeadings) // Automatically link headings to their slugs
+    .use(remarkParse)
+    .use(remarkRehype)
+    .use(rehypeDocument, { title: data.title || "Untitled" })
+    .use(rehypeFormat)
+    .use(rehypeStringify)
+    .use(rehypeSlug)
+    .use(rehypeAutolinkHeadings)
     .use(rehypePrettyCode, {
-      theme: "github-dark", // Use a GitHub dark theme for code blocks
+      theme: "github-dark",
       transformers: [
         transformerCopyButton({
-          visibility: "always", // Show copy button at all times
-          feedbackDuration: 3000, // Show feedback for 3 seconds
+          visibility: "always",
+          feedbackDuration: 3000,
         }),
       ],
     });
 
-  // Process the content and generate the HTML
   const htmlContent = (await processor.process(content)).toString();
-
   return (
     <div className="bg-white text-gray-800">
       <div className="max-w-6xl mx-auto p-6 sm:p-8 md:p-10 lg:p-12">
