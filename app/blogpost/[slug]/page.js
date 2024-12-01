@@ -13,12 +13,16 @@ import OnThisPage from "@/components/onthispage";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
 import "./styles.css";
-
 export default async function Page({ params }) {
-  // Define the path to the markdown file based on the slug
-  const filepath = `content/${params.slug}.md`;
+  const slug = await params.slug;
 
-  // If the file does not exist, show a 404 page
+  const relativePath = `content/${slug}.md`;
+  const absolutePath = `/content/${slug}.md`;
+
+  const filepath = (await fs.existsSync(relativePath))
+    ? relativePath
+    : absolutePath;
+
   if (!fs.existsSync(filepath)) {
     notFound();
     return;
@@ -62,7 +66,9 @@ export default async function Page({ params }) {
             &quot;{data.description}&quot;
           </p>
           <div className="flex gap-4 flex-wrap mb-4">
-            <p className="text-xs sm:text-sm text-gray-500 italic">By {data.author}</p>
+            <p className="text-xs sm:text-sm text-gray-500 italic">
+              By {data.author}
+            </p>
             <p className="text-xs sm:text-sm text-gray-500">{data.date}</p>
           </div>
         </div>
