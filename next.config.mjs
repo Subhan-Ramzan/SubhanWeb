@@ -1,10 +1,18 @@
 /** @type {import('next').NextConfig} */
+const path = require("path");
+
 const nextConfig = {
-  images: {
-    domains: ['th.bing.com', 'c10.patreonusercontent.com'], // External domains for images
-    unoptimized: true, // Disable image optimization for static export
+  experimental: {
+    appDir: true, 
   },
-  // output: 'export', // Static export configuration
+  images: {
+    domains: ["th.bing.com", "c10.patreonusercontent.com"], 
+    unoptimized: true, 
+  },
+  webpack: (config) => {
+    config.resolve.alias["content"] = path.join(__dirname, "content"); /
+    return config;
+  },
 };
 
 export default nextConfig;

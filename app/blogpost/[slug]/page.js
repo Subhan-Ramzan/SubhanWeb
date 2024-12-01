@@ -14,30 +14,20 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import OnThisPage from "@/components/onthispage";
 import "./styles.css";
-export async function generateMetadata({ params }) {
-  const { slug } = await params;
-  const filepath = `content/${slug}.md`;
 
-  if (!fs.existsSync(filepath)) {
-    return notFound();
-  }
-
-  const fileContent = fs.readFileSync(filepath, "utf-8");
-  const { data } = matter(fileContent);
-
-  return {
-    title: data.title,
-    description: data.description,
-  };
+export async function generateStaticParams() {
+  const files = fs.readdirSync("content");
+  return files.map((file) => ({
+    slug: file.replace(".md", ""),
+  }));
 }
 
 export default async function Page({ params }) {
-  const slug = await params.slug;
+  const slug = params.slug;
   const filepath = `content/${slug}.md`;
 
   if (!fs.existsSync(filepath)) {
-    notFound();
-    return;
+    return { notFound: true };
   }
 
   const fileContent = fs.readFileSync(filepath, "utf-8");
@@ -62,6 +52,7 @@ export default async function Page({ params }) {
     });
 
   const htmlContent = (await processor.process(content)).toString();
+
   return (
     <div className="bg-white text-gray-800">
       <div className="max-w-6xl mx-auto p-6 sm:p-8 md:p-10 lg:p-12">
