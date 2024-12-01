@@ -2,9 +2,9 @@
 import { useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
+import Image from "next/image";
 export default function About() {
   useEffect(() => {
-    // Adding simple fade-in animations on scroll
     const sections = document.querySelectorAll("section");
     const observer = new IntersectionObserver(
       (entries) => {
@@ -35,7 +35,7 @@ export default function About() {
           property="og:description"
           content="Explore Subhan Ramzan's journey as a web developer and full stack developer. Discover his projects and skills."
         />
-        <meta property="og:url" content="https://subhanramzan.com/about" />
+        <meta property="og:url" content="https://subhanportfolio.vercel.app/read" />
         <meta property="og:type" content="website" />
       </Head>
       <div className="flex items-center justify-center space-x-5 px-4 md:px-0">
@@ -52,14 +52,24 @@ export default function About() {
         <div className="max-w-6xl mx-auto px-6 sm:px-4 lg:px-0">
           {/* Profile Section */}
           <section className="opacity-100 transition-all duration-700 bg-white p-6 sm:p-10 rounded-lg shadow-lg mb-10 transform">
-            <div className="flex items-center justify-center space-x-2 mb-4 flex-wrap">
-              <h1 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 tracking-wider transition-transform duration-500 transform hover:scale-105 hover:rotate-2 drop-shadow-lg">
-                Subhan
-              </h1>
-              <h1 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 tracking-wider transition-transform duration-500 transform hover:scale-105 hover:rotate-2 drop-shadow-lg">
-                Ramzan
-              </h1>
+            <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-x-6 sm:space-y-0 mb-4">
+              <Image
+                width={100}
+                height={100}
+                src="/Subhan-Crop.jpg"
+                className="rounded-full w-24 h-24 sm:w-28 sm:h-28 object-cover shadow-lg"
+                alt="Subhan's Photo"
+              />
+              <div className="flex gap-2 items-center sm:items-start max-sm:w-full max-sm:justify-center max-sm:flex-wrap">
+                <h1 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 tracking-wider transition-transform duration-500 transform hover:scale-105 hover:rotate-2 drop-shadow-lg">
+                  Subhan
+                </h1>
+                <h1 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 tracking-wider transition-transform duration-500 transform hover:scale-105 hover:rotate-2 drop-shadow-lg">
+                  Ramzan
+                </h1>
+              </div>
             </div>
+
 
             <h2 className="text-xl sm:text-2xl text-blue-600 font-semibold mb-4">
               Web Developer & Full Stack Developer
@@ -99,13 +109,13 @@ export default function About() {
           </section>
 
           {/* Contact Section */}
-          <section className="opacity-0 text-black transition-all duration-700 bg-white px-2 py-8 md:p-10 sm:p-14 rounded-lg shadow-xl mb-16 transform">
-            <h2 className="text-3xl font-semibold text-gray-800 mb-10 text-center">
+          <section className="opacity-0 text-black transition-all duration-700 bg-white px-4 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10 rounded-lg shadow-xl mb-10 transform">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800 mb-6 sm:mb-10 text-center">
               Contact Information
             </h2>
-            <div className="md:max-w-6xl w-full mx-auto grid grid-cols-1 sm:grid-cols-2 gap-10">
-              <div className="space-y-6">
-                <p className="text-lg text-gray-700">
+            <div className="w-full mx-auto grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-8 md:max-w-6xl">
+              <div className="space-y-4 sm:space-y-6">
+                <p className="text-base sm:text-lg text-gray-700">
                   <strong className="font-semibold text-black">Phone: </strong>
                   <Link
                     href="https://wa.me/+923250826305"
@@ -117,7 +127,7 @@ export default function About() {
                   </Link>
                 </p>
 
-                <p className="text-lg text-gray-700 max-md:truncate">
+                <p className="text-base sm:text-lg text-gray-700">
                   <strong className="font-semibold text-black ">Email: </strong>
                   <Link
                     href="mailto:subhanramzan215@gmail.com"
@@ -126,10 +136,9 @@ export default function About() {
                     subhanramzan215@gmail.com
                   </Link>
                 </p>
-                <p className="text-lg text-gray-700">
-                  <strong className="font-semibold text-black">
-                    Address:{" "}
-                  </strong>
+
+                <p className="text-base sm:text-lg text-gray-700">
+                  <strong className="font-semibold text-black">Address: </strong>
                   <Link
                     href="https://www.google.com/maps?q=Mukarram+Town,+Rawalpindi"
                     target="_blank"
@@ -140,11 +149,10 @@ export default function About() {
                   </Link>
                 </p>
               </div>
-              <div className="space-y-6 max-md:truncate">
-                <p className="text-lg text-gray-700">
-                  <strong className="font-semibold text-black">
-                    Portfolio:{" "}
-                  </strong>
+
+              <div className="space-y-4 sm:space-y-6">
+                <p className="text-base sm:text-lg text-gray-700">
+                  <strong className="font-semibold text-black">Portfolio: </strong>
                   <Link
                     href="https://subhanportfolio.vercel.app"
                     className="text-blue-600 hover:underline transition-all transform hover:scale-105"
@@ -158,12 +166,13 @@ export default function About() {
             </div>
           </section>
 
+
           {/* Skills Section */}
-          <section className="opacity-0 transition-all duration-700  bg-white p-6 sm:p-10 rounded-lg shadow-lg mb-10 transform">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6">
+          <section className="opacity-0 transition-all duration-700 bg-white p-4 sm:p-6 lg:p-10 rounded-lg shadow-lg mb-10 transform">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 mb-4 sm:mb-6">
               Skills
             </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
               {[
                 "Web Development",
                 "Full Stack Development",
@@ -180,13 +189,14 @@ export default function About() {
               ].map((skill, index) => (
                 <div
                   key={index}
-                  className="p-4 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-700 hover:to-blue-700 text-white font-bold rounded-lg duration-300 shadow-lg transform transition-all hover:scale-105"
+                  className="p-3 sm:p-4 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-700 hover:to-blue-700 text-white font-bold rounded-lg duration-300 shadow-lg transform transition-all hover:scale-105"
                 >
                   {skill}
                 </div>
               ))}
             </div>
           </section>
+
 
           {/* Education Section */}
           <section className="opacity-0 transition-all duration-700 bg-white p-6 sm:p-10 rounded-lg shadow-lg mb-10 transform">

@@ -32,7 +32,7 @@ const MainContent = () => {
                 </h1>
                 <p>A crowdfunding platform for creators to fund their projects</p>
                 <p>Discover the perfect blend with Get Tea – your go-to destination for authentic and aromatic tea</p>
-                <div className='mt-4 space-x-2'>
+                <div className='mt-4 space-x-2 max-md:space-y-2 '>
                     <Link href="/login">
                         <button className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-2 px-4 rounded">
                             Start Here
